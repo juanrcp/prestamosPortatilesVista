@@ -18,7 +18,7 @@
   		<div class="collapse navbar-collapse" id="navbarNav">
     		<ul class="navbar-nav">
       			<li class="nav-item active">
-        			<a class="nav-link" href="vistas/AltaAlumno.jsp">Matricular a un Alumno</a>
+        			<a class="nav-link" href="<c:url value="navegacionFormularioAltaAlumno"/>">Matricular a un Alumno</a>
       			</li>
       			<li class="nav-item">
         			<a class="nav-link" href="#">Dar de Baja a un Alumno</a>

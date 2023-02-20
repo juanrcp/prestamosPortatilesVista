@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.prestamosVista.aplicacion.dal.AlumnoRepositorio;
 import edu.prestamosVista.aplicacion.dal.Alumnos;
+import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
+import edu.prestamosVista.aplicacion.dto.DTOaDAO;
 
 //Controlador que gestiona la comunicación entre modelo y vista
 @Controller
@@ -30,21 +32,39 @@ public class Controlador {
 	//Creacion de modelo
 	Map<String, Object> miModelo = new HashMap<String, Object>();
 	
+	//Mensajes de confirmación
+	String mensaje;
+	
 	//Inyectamos interfaz
 	@Autowired
-	AlumnoRepositorio alumnoInterfaz;
+	AlumnoRepositorio alumnoRepositorio;
+	
+	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo usuario vacio
+	@RequestMapping(value="/navegacionFormularioAltaAlumno")
+	public String navegacionFormularioAltaAlumno(Model modelo) {
+		logger.info("Navegamos al formulario de Alta");
+		AlumnosDTO nuevoAlumnoDTO = new AlumnosDTO();
 		
+		
+		
+	 	modelo.addAttribute("nuevoAlumno", nuevoAlumnoDTO);
+		return "AltaAlumno";
+	} 
 		
 	//Metodo post para añadir un nuevo alumno a la BBDD. 
-	@RequestMapping(value="/pruebaPost", method = RequestMethod.POST)
-	public ModelAndView pruebaPOST(@ModelAttribute("UsuarioNuevo") Alumnos nuevoAlumno) {	
+	@RequestMapping(value="/altaAlumno", method = RequestMethod.POST)
+	public ModelAndView altaAlumno(@ModelAttribute("nuevoAlumno") AlumnosDTO nuevoAlumnoDTO) {	
+		
+		DTOaDAO dtoadao = new DTOaDAO();
+				
+		alumnoRepositorio.save(dtoadao.alumnoDTOaDAO(nuevoAlumnoDTO));
 			
-		alumnoInterfaz.save(nuevoAlumno);
-			
-		//miModelo.put("listaAlumnos", alu);
+		//miModelo.put("listaAlumnos", listaAlumnos);
+		mensaje = "Alumno Guardado";
 
-						
-		return new ModelAndView("index", "miModelo", miModelo);
+		System.out.println("Alumno Guardado.");
+		miModelo.put("mensaje", mensaje);
+		return new ModelAndView("AltaAlumno", "miModelo", miModelo);
 	}
 	
 

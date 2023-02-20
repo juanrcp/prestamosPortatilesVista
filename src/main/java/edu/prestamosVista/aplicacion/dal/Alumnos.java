@@ -79,8 +79,7 @@ public class Alumnos {
 
 
 	//CONSTRUCTOR
-	public Alumnos(int id_alumno, String nombre_alumno, String telefono_alumno, Portatil portatil_asignado,
-			String md_uuid) {
+	public Alumnos(int id_alumno, String nombre_alumno, String telefono_alumno, Portatil portatil_asignado, String md_uuid) {
 		super();
 		this.id_alumno = id_alumno;
 		this.nombre_alumno = nombre_alumno;
@@ -89,13 +88,13 @@ public class Alumnos {
 		this.md_uuid = md_uuid;
 	}
 	
-	public Alumnos(String nombre_alumno, String telefono_alumno, Portatil portatil_asignado) {
+	public Alumnos(String nombre_alumno, String telefono_alumno, Portatil portatil_asignado, String md_uuid) {
 		super();
 		this.id_alumno = this.id_alumno;
 		this.nombre_alumno = nombre_alumno;
 		this.telefono_alumno = telefono_alumno;
 		this.portatil_asignado = portatil_asignado;
-		this.md_uuid = this.md_uuid;
+		this.md_uuid = md_uuid;
 	}
 
 	public Alumnos() {

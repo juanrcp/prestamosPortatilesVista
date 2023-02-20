@@ -16,7 +16,8 @@
 	<br>
 	<!-- Formulario donde creamos el nuevo usuario y presentamos una lista de ellos mediante metodo post -->
 	<h3>FORMULARIO POST PARA AGREGAR NUEVOS USUARIOS</h3>
-	<form:form action="altaUsuario" method="POST" modelAttribute="nuevoAlumno">
+	<br>
+	<form:form action="altaAlumno" method="POST" modelAttribute="nuevoAlumno">
  		<ul>
   			<li>
     			<form:label path="nombre_alumno">NOMBRE COMPLETO:</form:label>
@@ -32,8 +33,6 @@
   				<button type="Submit">GUARDAR</button>
 			</li>
  		</ul>
-
-		<br>
 	</form:form>
 </body>
 </html>

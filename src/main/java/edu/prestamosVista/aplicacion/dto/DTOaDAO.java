@@ -1,5 +1,8 @@
 package edu.prestamosVista.aplicacion.dto;
 
+
+import java.util.Date;
+
 import org.springframework.stereotype.Service;
 
 import edu.prestamosVista.aplicacion.dal.Alumnos;
@@ -12,7 +15,13 @@ public class DTOaDAO {
 
 	//Metodo para convertir a los alumnosDTO a DAO
 	public Alumnos alumnoDTOaDAO(AlumnosDTO alum) {
-		return new Alumnos(alum.getNombre_alumno(), alum.getTelefono_alumno(), alum.getPortatil_asignado());
+		
+		//Obtenemos fecha para actualizar el metadato
+		Date fecha = new Date();
+		 
+        System.out.println(fecha); 
+		
+		return new Alumnos(alum.getNombre_alumno(), alum.getTelefono_alumno(), alum.getPortatil_asignado(), ("Alumno-" + fecha));
 	}
 		
 	//Metodo para convertir a los portatilesDTO a DAO
