@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu</groupId>
+  <artifactId>prestamosVista</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-webmvc</artifactId>
+  		<version>${org.springframework.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-test</artifactId>
+  		<version>${org.springframework.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>4.12</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>javax.servlet.jsp.jstl</groupId>
+  		<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+  		<version>1.2.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.taglibs</groupId>
+  		<artifactId>taglibs-standard-impl</artifactId>
+  		<version>1.2.5</version>
+  	</dependency>
+  	
+  	<!-- HIBERNATE -->
+	<!-- Incluye core -->
+    <dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-core</artifactId>
+    	<version>5.2.17.Final</version>
+	</dependency>
+
+	<!-- DRIVERS BBDD-->
+	<dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>42.5.0</version>
+	</dependency>
+	
+	<!-- Para que funcione @EnableJpaRepositories -->
+	<dependency>
+    	<groupId>org.springframework.data</groupId>
+    	<artifactId>spring-data-jpa</artifactId>
+    	<version>2.0.7.RELEASE</version>
+	</dependency>
+	
+	  <!-- NECESARIO PARA TRABAJAR CON CIERTAS VERSIONES DE TOMCAT -->
+	<dependency>
+    	<groupId>org.javassist</groupId>
+    	<artifactId>javassist</artifactId>
+    	<version>3.25.0-GA</version>
+	</dependency>
+	
+	<!-- MEJORA EL MAPEO DE OBJETOS -->
+	<dependency>
+    	<groupId>javax.xml.bind</groupId>
+    	<artifactId>jaxb-api</artifactId>
+    	<version>2.3.0</version>
+	</dependency>
+
+	
+	</dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>18</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+  	<org.springframework.version>5.0.6.RELEASE</org.springframework.version>
+  </properties>
+</project>

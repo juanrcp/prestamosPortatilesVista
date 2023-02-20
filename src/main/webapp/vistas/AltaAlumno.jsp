@@ -1,0 +1,39 @@
+<!-- Importamos las cabeceras -->
+<%@ include file="/utiles/cabeceras.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Marticular Alumno</title>
+</head>
+<body>
+	<!-- Importamos el menu -->
+	<%@ include file="/vistas/menu.jsp"%>
+	<br>
+	<h1>FORMULARIO DE MATRICULACIÓN ALUMNOS</h1>
+	<br>
+	<!-- Formulario donde creamos el nuevo usuario y presentamos una lista de ellos mediante metodo post -->
+	<h3>FORMULARIO POST PARA AGREGAR NUEVOS USUARIOS</h3>
+	<form:form action="altaUsuario" method="POST" modelAttribute="nuevoAlumno">
+ 		<ul>
+  			<li>
+    			<form:label path="nombre_alumno">NOMBRE COMPLETO:</form:label>
+    			<form:input type="text"  path="nombre_alumno"/>
+  			</li>
+  			<br>
+  			<li>
+    			<form:label path="telefono_alumno">TELEFONO:</form:label>
+    			<form:input type="number"  path="telefono_alumno"/>
+  			</li>
+  			<br>
+  			<li class="button">
+  				<button type="Submit">GUARDAR</button>
+			</li>
+ 		</ul>
+
+		<br>
+	</form:form>
+</body>
+</html>
