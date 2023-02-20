@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.prestamosVista.aplicacion.dal.AlumnoRepositorio;
 import edu.prestamosVista.aplicacion.dal.Alumnos;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
+import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOaDAO;
 
 //Controlador que gestiona la comunicación entre modelo y vista
@@ -29,11 +30,14 @@ public class Controlador {
 	//Lista de Alumnos
 	List<Alumnos> listaAlumnos = new ArrayList<Alumnos>();
 	
+	//Lista de AlumnosDTO
+	List<AlumnosDTO> listaAlumnosDTO = new ArrayList<AlumnosDTO>();
+	
 	//Creacion de modelo
 	Map<String, Object> miModelo = new HashMap<String, Object>();
 	
 	//Mensajes de confirmación
-	String mensaje;
+	String mensaje = null;
 	
 	//Inyectamos interfaz
 	@Autowired
@@ -43,9 +47,7 @@ public class Controlador {
 	@RequestMapping(value="/navegacionFormularioAltaAlumno")
 	public String navegacionFormularioAltaAlumno(Model modelo) {
 		logger.info("Navegamos al formulario de Alta");
-		AlumnosDTO nuevoAlumnoDTO = new AlumnosDTO();
-		
-		
+		AlumnosDTO nuevoAlumnoDTO = new AlumnosDTO();		
 		
 	 	modelo.addAttribute("nuevoAlumno", nuevoAlumnoDTO);
 		return "AltaAlumno";
@@ -64,7 +66,23 @@ public class Controlador {
 
 		System.out.println("Alumno Guardado.");
 		miModelo.put("mensaje", mensaje);
-		return new ModelAndView("AltaAlumno", "miModelo", miModelo);
+		return new ModelAndView("Confirmacion", "miModelo", miModelo);
+	}
+	
+	//Metodo que extrae a todos los alumnos y los muestra
+	@RequestMapping(value="/mostrarAlumnos")
+	public ModelAndView MostrarAlumnos() {
+		
+		DAOaDTO daoadto = new DAOaDTO();
+		
+		for (Alumnos alumnos : alumnoRepositorio.findAll()) {
+			
+			listaAlumnosDTO.add(daoadto.alumnoDAOaDTO(alumnos));		
+		}
+		
+		
+		miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
+		return new ModelAndView("BorrarAlumno", "miModelo", miModelo);
 	}
 	
 

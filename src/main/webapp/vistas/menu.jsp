@@ -21,7 +21,7 @@
         			<a class="nav-link" href="<c:url value="navegacionFormularioAltaAlumno"/>">Matricular a un Alumno</a>
       			</li>
       			<li class="nav-item">
-        			<a class="nav-link" href="#">Dar de Baja a un Alumno</a>
+        			<a class="nav-link" href="<c:url value="mostrarAlumnos"/>">Dar de Baja a un Alumno</a>
       			</li>
       			<li class="nav-item">
         			<a class="nav-link" href="#">Alta de Portátil</a>
