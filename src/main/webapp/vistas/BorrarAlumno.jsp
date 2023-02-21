@@ -6,35 +6,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Borrar Alumno</title>
+<title>Insert title here</title>
 </head>
 <body>
-<!-- Importamos el menu -->
+	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<br>
-	<h1>LISTA DE ALUMNOS</h1>
+	<h1>CONFIRMAR BORRADO</h1>
+	<h3>PARA BORRAR AL ALUMNO ESCRIBA: "BORRAR"</h3>
 	<br>
-	<table>
-		<thead>
-			<th>ID</th>
-			<th>NOMBRE</th>
-			<th>TELEFONO</th>
-		</thead>
-		<tbody>
-			<c:forEach items="${miModelo.listaAlumnosDTO}" var="alumno">
-				<tr>
-					<td>
-						<c:out value="${alumno.id_alumno}"></c:out>
-					</td>
-					<td>
-						<c:out value="${alumno.nombre_alumno}"></c:out>
-					</td>
-					<td>
-						<c:out value="${alumno.telefono_alumno}"></c:out>
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<form:form action="confirmarBorradoAlumnos" method="POST" modelAttribute="mensajeC">
+ 		<ul>
+  			<li>
+    			<form:label path="mensajeC">¿BORRAR?:</form:label>
+    			<form:input type="text"  path="mensajeC"/>
+  			</li>
+  			<br>
+  			<li class="button">
+  				<button type="Submit">CONFIRMAR</button>
+			</li>
+ 		</ul>
+	</form:form>
 </body>
 </html>

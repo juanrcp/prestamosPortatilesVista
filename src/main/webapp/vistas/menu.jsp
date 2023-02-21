@@ -24,7 +24,7 @@
         			<a class="nav-link" href="<c:url value="mostrarAlumnos"/>">Dar de Baja a un Alumno</a>
       			</li>
       			<li class="nav-item">
-        			<a class="nav-link" href="#">Alta de Portátil</a>
+        			<a class="nav-link" href="navegacionFormularioAltaPortatil">Alta de Portátil</a>
       			</li>
       			<li class="nav-item">
         			<a class="nav-link disabled" href="#">Consulta Portátil Asignado a un Alumno</a>
