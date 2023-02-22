@@ -15,11 +15,11 @@
 	<h1>CONFIRMAR BORRADO</h1>
 	<h3>PARA BORRAR AL ALUMNO ESCRIBA: "BORRAR"</h3>
 	<br>
-	<form:form action="confirmarBorradoAlumnos" method="POST" modelAttribute="mensajeC">
+	<form:form action="borrarAlumno" method="POST" modelAttribute="mensajeC">
  		<ul>
   			<li>
-    			<form:label path="mensajeC">¿BORRAR?:</form:label>
-    			<form:input type="text"  path="mensajeC"/>
+    			<form:label path="">¿BORRAR?:</form:label>
+    			<form:input type="text"  path=""/>
   			</li>
   			<br>
   			<li class="button">

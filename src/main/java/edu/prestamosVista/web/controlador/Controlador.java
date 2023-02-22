@@ -103,21 +103,22 @@ public class Controlador {
 	}
 	
 	//Ir a confirmar borrado
-		@RequestMapping(value="/borrarAlumno/{idSeleccionada}")
-		public String confirmarBorradoAlumnos(@ModelAttribute("mensajeC") String mensajeC) {
-			miModelo.put("mensajeC", mensajeC);
+	@RequestMapping(value="/borrarAlumno/{idSeleccionada}")
+	public String confirmarBorradoAlumnos(@ModelAttribute("mensajeC") String mensajeC) {
+		miModelo.put("mensajeC", mensajeC);
 			
 			
-			return "BorrarAlumno";
-		}
+		//return new ModelAndView("BorrarAlumno", "miModelo", miModelo);
+		return "BorrarAlumno";
+	}
 	
 	//Metodo para borrar un alumno y generar mensaje de confirmacion. 
 	@RequestMapping(value="/BorrarAlumno")
-	public ModelAndView borrarAlumno(@ModelAttribute("idSeleccionada") int idAlumno) {
+	public ModelAndView borrarAlumno() {
 		
 		if(((String) miModelo.get("mensajeC")).toUpperCase() == "BORRAR") {
 			
-			alumnoRepositorio.deleteById(idAlumno);
+			alumnoRepositorio.deleteById((Integer) miModelo.get("idSeleccionada"));
 			mensaje = "Alumno eliminado correctamente.";
 			
 		}
@@ -131,14 +132,14 @@ public class Controlador {
 	
 	
 	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo portatil vacio
-		@RequestMapping(value="/navegacionFormularioAltaPortatil")
-		public String navegacionFormularioAltaPortatil(Model modelo) {
-			logger.info("Navegamos al formulario de Alta");
-			PortatilesDTO nuevoPortatilDTO = new PortatilesDTO();		
+	@RequestMapping(value="/navegacionFormularioAltaPortatil")
+	public String navegacionFormularioAltaPortatil(Model modelo) {
+		logger.info("Navegamos al formulario de Alta");
+		PortatilesDTO nuevoPortatilDTO = new PortatilesDTO();		
 			
-		 	modelo.addAttribute("nuevoPortatil", nuevoPortatilDTO);
-			return "AltaPortatil";
-		} 
+	 	modelo.addAttribute("nuevoPortatil", nuevoPortatilDTO);
+		return "AltaPortatil";
+	} 
 			
 		//Metodo post para añadir un nuevo portatil a la BBDD. 
 		@RequestMapping(value="/altaPortatil", method = RequestMethod.POST)

@@ -14,8 +14,6 @@
 	<br>
 	<h1>FORMULARIO DE MATRICULACIÓN ALUMNOS</h1>
 	<br>
-	<!-- Formulario donde creamos el nuevo usuario y presentamos una lista de ellos mediante metodo post -->
-	<h3>FORMULARIO POST PARA AGREGAR NUEVOS USUARIOS</h3>
 	<br>
 	<form:form action="altaAlumno" method="POST" modelAttribute="nuevoAlumno">
  		<ul>
