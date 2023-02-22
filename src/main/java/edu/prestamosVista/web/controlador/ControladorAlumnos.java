@@ -21,7 +21,7 @@ import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOaDAO;
 
-//Controlador que gestiona la comunicación entre modelo y vista
+//Controlador que gestiona la comunicación entre modelo y vista de las altas de los alumnos
 @Controller
 public class ControladorAlumnos {
 
@@ -73,25 +73,7 @@ public class ControladorAlumnos {
 		return new ModelAndView("Confirmacion", "miModelo", miModelo);
 	}
 	
-	//Metodo que extrae a todos los alumnos y los muestra
-	@RequestMapping(value="/mostrarAlumnos")
-	public ModelAndView mostrarAlumnos() {
-		//Lista de alumnos AUX la cual reiniciaremos cada vez que ejecutamos el metodo. 
-		List<AlumnosDTO> listaAlumnosDTOaux = new ArrayList<>();
-		DAOaDTO daoadto = new DAOaDTO();
-		
-		for (Alumnos alumnos : alumnoRepositorio.findAll()) {
-			
-			listaAlumnosDTOaux.add(daoadto.alumnoDAOaDTO(alumnos));		
-		}
-		
-		//Guardamos la lista dentro de la lista final.
-		listaAlumnosDTO = listaAlumnosDTOaux;
-		
-		miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
-		
-		return new ModelAndView("ListaAlumnos", "miModelo", miModelo);
-	}
+	
 	
 	//Ir a confirmar borrado. HAY QUE OBTENER DE LA URL EL ID 
 	@RequestMapping(value="/confirmarBorradoAlumnos")

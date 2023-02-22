@@ -42,5 +42,22 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br>
+	<br>
+	<h2>CONSULTAR PORTATIL</h2>
+	<h3>Introduzca el ID del Alumno para ver su Portatil asignado:</h3>
+	<br>
+	<form:form action="portatilDeAlumno" method="POST" modelAttribute="idAlumno">
+ 		<ul>
+  			<li>
+    			<form:label path="">ID del Alumno:</form:label>
+    			<form:input type="number"  path=""/>
+  			</li>
+  			<br>
+  			<li class="button">
+  				<button type="Submit">GUARDAR</button>
+			</li>
+ 		</ul>
+	</form:form>
 </body>
 </html>
