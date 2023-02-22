@@ -17,15 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.prestamosVista.aplicacion.dal.AlumnoRepositorio;
 import edu.prestamosVista.aplicacion.dal.Alumnos;
-import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOaDAO;
-import edu.prestamosVista.aplicacion.dto.PortatilesDTO;
 
 //Controlador que gestiona la comunicación entre modelo y vista
 @Controller
-public class Controlador {
+public class ControladorAlumnos {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 	
@@ -44,12 +42,10 @@ public class Controlador {
 	//Id del alumno seleccionado
 	int idSeleccionada = 0;
 	
+
 	//Inyectamos interfaz
 	@Autowired
 	AlumnoRepositorio alumnoRepositorio;
-	
-	@Autowired
-	PortatilRepositorio portatilRopositorio;
 	
 	
 	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo alumno vacio
@@ -80,31 +76,30 @@ public class Controlador {
 	//Metodo que extrae a todos los alumnos y los muestra
 	@RequestMapping(value="/mostrarAlumnos")
 	public ModelAndView mostrarAlumnos() {
-		
+		//Lista de alumnos AUX la cual reiniciaremos cada vez que ejecutamos el metodo. 
+		List<AlumnosDTO> listaAlumnosDTOaux = new ArrayList<>();
 		DAOaDTO daoadto = new DAOaDTO();
 		
 		for (Alumnos alumnos : alumnoRepositorio.findAll()) {
 			
-			listaAlumnosDTO.add(daoadto.alumnoDAOaDTO(alumnos));		
+			listaAlumnosDTOaux.add(daoadto.alumnoDAOaDTO(alumnos));		
 		}
 		
-		if(miModelo.containsKey("listaAlumnosDTO")) {
-			miModelo.remove("listaAlumnosDTO");
-			
-		}
+		//Guardamos la lista dentro de la lista final.
+		listaAlumnosDTO = listaAlumnosDTOaux;
+		
 		miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
-		
-		miModelo.put("idSeleccionada", idSeleccionada);
-		
-		String mensajeC = null;
-		miModelo.put("mensajeC", mensajeC);
 		
 		return new ModelAndView("ListaAlumnos", "miModelo", miModelo);
 	}
 	
-	//Ir a confirmar borrado
-	@RequestMapping(value="/borrarAlumno/{idSeleccionada}")
+	//Ir a confirmar borrado. HAY QUE OBTENER DE LA URL EL ID 
+	@RequestMapping(value="/confirmarBorradoAlumnos")
 	public String confirmarBorradoAlumnos(@ModelAttribute("mensajeC") String mensajeC) {
+		
+		///////
+		
+		miModelo.put("idSeleccionada", idSeleccionada);
 		miModelo.put("mensajeC", mensajeC);
 			
 			
@@ -113,7 +108,7 @@ public class Controlador {
 	}
 	
 	//Metodo para borrar un alumno y generar mensaje de confirmacion. 
-	@RequestMapping(value="/BorrarAlumno")
+	@RequestMapping(value="/borrarAlumno")
 	public ModelAndView borrarAlumno() {
 		
 		if(((String) miModelo.get("mensajeC")).toUpperCase() == "BORRAR") {
@@ -130,30 +125,5 @@ public class Controlador {
 		return new ModelAndView("Confirmacion", "miModelo", miModelo);
 	}
 	
-	
-	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo portatil vacio
-	@RequestMapping(value="/navegacionFormularioAltaPortatil")
-	public String navegacionFormularioAltaPortatil(Model modelo) {
-		logger.info("Navegamos al formulario de Alta");
-		PortatilesDTO nuevoPortatilDTO = new PortatilesDTO();		
-			
-	 	modelo.addAttribute("nuevoPortatil", nuevoPortatilDTO);
-		return "AltaPortatil";
-	} 
-			
-		//Metodo post para añadir un nuevo portatil a la BBDD. 
-		@RequestMapping(value="/altaPortatil", method = RequestMethod.POST)
-		public ModelAndView altaPortatil(@ModelAttribute("nuevoPortatil") PortatilesDTO nuevoPortatilDTO) {	
-			
-			DTOaDAO dtoadao = new DTOaDAO();
-					
-			portatilRopositorio.save(dtoadao.portatiDTOaDAO(nuevoPortatilDTO));
-				
-			mensaje = "Portatil Guardado";
-
-			System.out.println("Portatil Guardado.");
-			miModelo.put("mensaje", mensaje);
-			return new ModelAndView("Confirmacion", "miModelo", miModelo);
-		}
 
 }

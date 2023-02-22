@@ -16,10 +16,12 @@
 	<br>
 	<table>
 		<thead>
-			<th>ID</th>
-			<th>NOMBRE</th>
-			<th>TELEFONO</th>
-			<th>¿BORRAR?</th>
+			<tr>
+				<th>ID</th>
+				<th>NOMBRE</th>
+				<th>TELEFONO</th>
+				<th>¿BORRAR?</th>
+			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${miModelo.listaAlumnosDTO}" var="alumno">
@@ -34,7 +36,7 @@
 						<c:out value="${alumno.telefono_alumno}"></c:out>
 					</td>
 					<td>
-						<a puth="idSeleccionada" href="<c:url value="borrarAlumno/${alumno.id_alumno}"/>">BORRAR</a>					
+						<a id="idSeleccionada" href="<c:url value="confirmarBorradoAlumnos/${alumno.id_alumno}"/>">BORRAR</a>
 					</td>
 				</tr>
 			</c:forEach>
