@@ -15,7 +15,7 @@
 	<h1>CONFIRMAR BORRADO</h1>
 	<h3>PARA BORRAR AL ALUMNO ESCRIBA: "BORRAR"</h3>
 	<br>
-	<form:form action="borrarAlumno" method="POST" modelAttribute="mensajeC">
+	<form:form action="borraAlumno" method="POST" modelAttribute="dtoUtil">
  		<ul>
   			<li>
     			<form:label path="mensajeC">¿BORRAR?:</form:label>

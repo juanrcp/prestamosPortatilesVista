@@ -50,7 +50,6 @@ protected final Log logger = LogFactory.getLog(getClass());
 	//Util para pasar informacion desde los formularios
 	DTOUtiles dtoUtil = new DTOUtiles();
 
-	
 
 	//Inyectamos interfaz
 	@Autowired
@@ -63,32 +62,31 @@ protected final Log logger = LogFactory.getLog(getClass());
 	//Metodo que extrae a todos los alumnos y los muestra
 	@RequestMapping(value="/mostrarAlumnos")
 	public ModelAndView mostrarAlumnos(Model model) {
-	//Lista de alumnos AUX la cual reiniciaremos cada vez que ejecutamos el metodo. 
-	List<AlumnosDTO> listaAlumnosDTOaux = new ArrayList<>();
-	DAOaDTO daoadto = new DAOaDTO();
-	
-	for (Alumnos alumnos : alumnoRepositorio.findAll()) {
 		
-		listaAlumnosDTOaux.add(daoadto.alumnoDAOaDTO(alumnos));		
-	}
+		//Lista de alumnos AUX la cual reiniciaremos cada vez que ejecutamos el metodo. 
+		List<AlumnosDTO> listaAlumnosDTOaux = new ArrayList<>();
+		DAOaDTO daoadto = new DAOaDTO();
+	
+		for (Alumnos alumnos : alumnoRepositorio.findAll()) {
 		
-	//Guardamos la lista dentro de la lista final.
-	listaAlumnosDTO = listaAlumnosDTOaux;
+			listaAlumnosDTOaux.add(daoadto.alumnoDAOaDTO(alumnos));		
+		}
+		
+		//Guardamos la lista dentro de la lista final.
+		listaAlumnosDTO = listaAlumnosDTOaux;
 	
-	model.addAttribute("dtoUtil", dtoUtil);
+		model.addAttribute("dtoUtil", dtoUtil);
 	
-	miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
+		miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
 		
 		return new ModelAndView("ListaAlumnos", "miModelo", miModelo);
 	}
 	
+	//Metodo para buscar portatil mediante el ID del alumno
 	@RequestMapping(value="/portatilDeAlumno", method = RequestMethod.POST)
 	public ModelAndView portatilDeAlumno(@ModelAttribute ("dtoUtil") DTOUtiles dtoUtil) {
 	
 	DAOaDTO daoadto = new DAOaDTO();
-	
-	////Lista de portatiles para encontrar el portatil asignado. 
-	//List<Portatil> listaPortatiles = new ArrayList<>();
 	
 	//Buscamos el alumno por su id y lo guardamos en el modelo
 	Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById(dtoUtil.getIdSeleccionado());
@@ -96,7 +94,6 @@ protected final Log logger = LogFactory.getLog(getClass());
 	miModelo.put("alumnoSeleccionado", daoadto.alumnoDAOaDTO(alumnoSeleccionado.get()));
 	
 	PortatilesDTO portatilAsignado = new PortatilesDTO();
-	
 	
 	
 	for (Portatil portatil : portatilRepositorio.findAll()) {
@@ -112,29 +109,29 @@ protected final Log logger = LogFactory.getLog(getClass());
 	
 	miModelo.put("portatilAsignado", portatilAsignado);
 		
-		return new ModelAndView("Confirmacion", "miModelo", miModelo);
+		return new ModelAndView("Resultados", "miModelo", miModelo);
 	}
 	
 	
-	//Ir a confirmar borrado. Con la etiqueta PathVariable podemos obtener la id que le pasamos por URL
+	
+	
+	//Ir a confirmar borrado en BorrarAlumno. Con la etiqueta PathVariable podemos obtener la id que le pasamos por URL
 	@RequestMapping(value="/confirmarBorradoAlumnos/{id_alumno}")
-	public String confirmarBorradoAlumnos(@PathVariable Integer id_alumno) {
+	public String confirmarBorradoAlumnos(@PathVariable Integer id_alumno, Model model) {
 			
-		idSeleccionada = id_alumno;
-			
+		idSeleccionada = id_alumno;			
 		miModelo.put("idSeleccionada", idSeleccionada);
-				
-				
-		miModelo.put("mensajeC", mensaje);
-		//return new ModelAndView("BorrarAlumno", "miModelo", miModelo);
+	
+		model.addAttribute("dtoUtil", dtoUtil);
+
 		return "BorrarAlumno";
 	}
 		
 		//Metodo para borrar un alumno y generar mensaje de confirmacion. 
-		@RequestMapping(value="/borrarAlumno")
-		public ModelAndView borrarAlumno(@ModelAttribute("mensajeC") String mensajeC) {
+		@RequestMapping(value="/confirmarBorradoAlumnos/borraAlumno", method = RequestMethod.POST)
+		public ModelAndView borraAlumno(@ModelAttribute("dtoUtil") DTOUtiles dtoUtil) {
 			
-			if(((String) miModelo.get("mensajeC")).toUpperCase() == "BORRAR") {
+			if(dtoUtil.getMensajeC().toUpperCase().equals("BORRAR")) {
 				
 				alumnoRepositorio.deleteById((Integer) miModelo.get("idSeleccionada"));
 				mensaje = "Alumno eliminado correctamente.";
@@ -144,6 +141,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 				mensaje = "No se ha realizado ningun cambio.";
 			}
 			
+			miModelo.put("mensaje", mensaje);
 				
 			return new ModelAndView("Confirmacion", "miModelo", miModelo);
 		}

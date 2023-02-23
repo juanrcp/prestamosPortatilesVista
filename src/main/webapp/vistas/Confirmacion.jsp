@@ -15,9 +15,5 @@
 	<c:if test="${miModelo.mensaje != null}">
 		<h3><c:out value="${miModelo.mensaje}"></c:out></h3>
 	</c:if>
-	<c:if test="${miModelo.alumnoSeleccionado != null}">
-		<p>ALUMNO: </p><p>${miModelo.alumnoSeleccionado}</p>
-		<p>Portatil asignado: </p><p>${miModelo.portatilAsignado}</p>
-	</c:if>
 </body>
 </html>

@@ -57,7 +57,7 @@ public class PortatilesDTO {
 	//ToString
 	@Override
 	public String toString() {
-		return "PortatilesDTO [numero_identificador=" + numero_identificador + ", marca=" + marca + ", modelo=" + modelo
+		return "Portatil => [numero_identificador=" + numero_identificador + ", marca=" + marca + ", modelo=" + modelo
 				+ "]";
 	}	
 	
