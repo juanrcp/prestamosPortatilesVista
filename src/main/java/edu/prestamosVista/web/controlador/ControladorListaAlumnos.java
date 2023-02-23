@@ -23,6 +23,7 @@ import edu.prestamosVista.aplicacion.dal.Portatil;
 import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
+import edu.prestamosVista.aplicacion.dto.DTOUtiles;
 import edu.prestamosVista.aplicacion.dto.PortatilesDTO;
 
 //Controlador que gestiona la comunicación entre modelo y vista de la lista de los alumnos
@@ -43,8 +44,11 @@ protected final Log logger = LogFactory.getLog(getClass());
 	//Mensajes de confirmación
 	String mensaje = null;
 	
-	//Id del alumno seleccionado
-	long idSeleccionada = 0;
+	//Id elegida del Alumno para borrarlo 
+	int idSeleccionada = 0;
+	
+	//Util para pasar informacion desde los formularios
+	DTOUtiles dtoUtil = new DTOUtiles();
 
 	
 
@@ -71,8 +75,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 	//Guardamos la lista dentro de la lista final.
 	listaAlumnosDTO = listaAlumnosDTOaux;
 	
-	int idAlumno = 0;
-	model.addAttribute("idAlumno", idAlumno);
+	model.addAttribute("dtoUtil", dtoUtil);
 	
 	miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
 		
@@ -80,22 +83,25 @@ protected final Log logger = LogFactory.getLog(getClass());
 	}
 	
 	@RequestMapping(value="/portatilDeAlumno", method = RequestMethod.POST)
-	public ModelAndView portatilDeAlumno(@ModelAttribute ("idAlumno") long idAlumno) {
-	//Lista de portatiles para encontrar el portatil asignado. 
-	List<Portatil> listaPortatiles = new ArrayList<>();
+	public ModelAndView portatilDeAlumno(@ModelAttribute ("dtoUtil") DTOUtiles dtoUtil) {
+	
+	DAOaDTO daoadto = new DAOaDTO();
+	
+	////Lista de portatiles para encontrar el portatil asignado. 
+	//List<Portatil> listaPortatiles = new ArrayList<>();
 	
 	//Buscamos el alumno por su id y lo guardamos en el modelo
-	Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById((int) idAlumno);
-	miModelo.put("alumnoSeleccionado", alumnoSeleccionado);
+	Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById(dtoUtil.getIdSeleccionado());
+	
+	miModelo.put("alumnoSeleccionado", daoadto.alumnoDAOaDTO(alumnoSeleccionado.get()));
 	
 	PortatilesDTO portatilAsignado = new PortatilesDTO();
 	
-	DAOaDTO daoadto = new DAOaDTO();
 	
 	
 	for (Portatil portatil : portatilRepositorio.findAll()) {
 		
-		if(portatil == alumnoSeleccionado.get().getPortatil_asignado()) {
+		if(portatil.getNumero_identificador().equals(alumnoSeleccionado.get().getPortatil_asignado().getNumero_identificador())) {
 			portatilAsignado = daoadto.portatiDAOaDTO(portatil);
 		}
 		else {
@@ -112,7 +118,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 	
 	//Ir a confirmar borrado. Con la etiqueta PathVariable podemos obtener la id que le pasamos por URL
 	@RequestMapping(value="/confirmarBorradoAlumnos/{id_alumno}")
-	public String confirmarBorradoAlumnos(@PathVariable long id_alumno) {
+	public String confirmarBorradoAlumnos(@PathVariable Integer id_alumno) {
 			
 		idSeleccionada = id_alumno;
 			

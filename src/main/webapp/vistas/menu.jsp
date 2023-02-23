@@ -18,16 +18,16 @@
   		<div class="collapse navbar-collapse" id="navbarNav">
     		<ul class="navbar-nav">
       			<li class="nav-item active">
-        			<a class="nav-link" href="<c:url value="navegacionFormularioAltaAlumno"/>">Matricular a un Alumno</a>
+        			<a class="nav-link" href="<c:url value="navegacionFormularioAltaAlumno"/>">MATRICULAR A UN ALUMNO</a>
       			</li>
       			<li class="nav-item">
-        			<a class="nav-link" href="<c:url value="mostrarAlumnos"/>">Dar de Baja a un Alumno</a>
+        			<a class="nav-link" href="<c:url value="mostrarAlumnos"/>">LISTA DE ALUMNOS</a>
       			</li>
       			<li class="nav-item">
-        			<a class="nav-link" href="<c:url value="navegacionFormularioAltaPortatil"/>">Alta de Portátil</a>
+        			<a class="nav-link" href="<c:url value="navegacionFormularioAltaPortatil"/>">ALTA DE PORTATILES</a>
       			</li>
       			<li class="nav-item">
-        			<a class="nav-link disabled" href="#">Consulta Portátil Asignado a un Alumno</a>
+        			<a class="nav-link disabled" href="#">LISTA DE PORTATILES</a>
       			</li>
       			<li class="nav-item">
         			<a class="nav-link disabled" href="#">Consulta Alumno Asignado a un Portátil</a>

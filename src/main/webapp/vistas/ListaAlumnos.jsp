@@ -47,11 +47,11 @@
 	<h2>CONSULTAR PORTATIL</h2>
 	<h3>Introduzca el ID del Alumno para ver su Portatil asignado:</h3>
 	<br>
-	<form:form action="portatilDeAlumno" method="POST" modelAttribute="idAlumno">
+	<form:form action="portatilDeAlumno" method="POST" modelAttribute="dtoUtil">
  		<ul>
   			<li>
-    			<form:label path="">ID del Alumno:</form:label>
-    			<form:input type="number"  path=""/>
+    			<form:label path="idSeleccionado">ID del Alumno:</form:label>
+    			<form:input type="number"  path="idSeleccionado"/>
   			</li>
   			<br>
   			<li class="button">

@@ -65,7 +65,7 @@ public class AplicacionConfiguracionContexto {
         emf.setJpaVendorAdapter(hibernateJpa);
         
         Properties jpaProperties = new Properties();
-        jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        //jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         jpaProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         jpaProperties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
         emf.setJpaProperties(jpaProperties);
