@@ -11,7 +11,9 @@
 <body>
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
-	<br>
-	<h1>BIENVENIDO A LA GESTION DE PORTATILES POR ALUMNOS</h1>
+	<div class="container">
+		<br>
+		<h1>BIENVENIDO A LA GESTION DE PORTATILES POR ALUMNOS</h1>
+	</div>
 </body>
 </html>

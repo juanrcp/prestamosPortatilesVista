@@ -12,30 +12,33 @@
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<br>
-	<h1>FORMULARIO DE ALTA PORTATILES</h1>
-	<br>
-	<br>
-	<form:form action="altaPortatil" method="POST" modelAttribute="nuevoPortatil">
- 		<ul>
-  			<li>
-    			<form:label path="numero_identificador">NÚMERO IDENTIFICADOR:</form:label>
-    			<form:input type="text"  path="numero_identificador"/>
-  			</li>
-  			<br>
-  			<li>
-    			<form:label path="marca">MARCA:</form:label>
-    			<form:input type="text"  path="marca"/>
-  			</li>
-  			<br>
-  			<li>
-    			<form:label path="modelo">MODELO:</form:label>
-    			<form:input type="text"  path="modelo"/>
-  			</li>
-  			<br>
-  			<li class="button">
-  				<button type="Submit">GUARDAR</button>
-			</li>
- 		</ul>
-	</form:form>
+	<div class="container">
+		<h1>FORMULARIO DE ALTA PORTATILES</h1>
+		<br>
+		<br>
+		<form:form action="altaPortatil" method="POST" modelAttribute="nuevoPortatil">
+ 			<ul>
+  				<li>
+    				<form:label path="numero_identificador">NÚMERO IDENTIFICADOR:</form:label>
+    				<form:input type="text"  path="numero_identificador"/>
+  				</li>
+  				<br>
+  				<li>
+    				<form:label path="marca">MARCA:</form:label>
+    				<form:input type="text"  path="marca"/>
+  				</li>
+  				<br>
+  				<li>
+    				<form:label path="modelo">MODELO:</form:label>
+    				<form:input type="text"  path="modelo"/>
+  				</li>
+  				<br>
+  				<li class="button">
+  					<button type="Submit">GUARDAR</button>
+				</li>
+ 			</ul>
+		</form:form>
+		<button onclick="history.back()">VOLVER A ATRAS</button>
+	</div>
 </body>
 </html>

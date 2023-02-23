@@ -12,26 +12,29 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  		<a class="navbar-brand" href="index.jsp">PRESTAMOS PORTÁTILES</a>
+  		<a class="navbar-brand" href="/prestamosVista/">PRESTAMOS PORTÁTILES</a>
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     		<span class="navbar-toggler-icon"></span>
   		</button>
   		<div class="collapse navbar-collapse" id="navbarNav">
     		<ul class="navbar-nav">
       			<li class="nav-item active">
-        			<a class="nav-link" href="<c:url value="navegacionFormularioAltaAlumno"/>">MATRÍCULAR A UN ALUMNO</a>
+        			<a class="nav-link" href="/prestamosVista/navegacionFormularioAltaAlumno">MATRÍCULAR A UN ALUMNO</a>
       			</li>
       			<li class="nav-item">
+      				<!-- Con esta forma concatenamos pero las rutas pueden fallar asi que mejor usamos rutas absolutas en el menu
         			<a class="nav-link" href="<c:url value="mostrarAlumnos"/>">LISTA DE ALUMNOS</a>
+      				 -->
+        			<a class="nav-link" href="/prestamosVista/mostrarAlumnos">LISTA DE ALUMNOS</a>
       			</li>
       			<li class="nav-item">
-        			<a class="nav-link" href="<c:url value="navegacionFormularioAltaPortatil"/>">ALTA DE PORTÁTILES</a>
+        			<a class="nav-link" href="/prestamosVista/navegacionFormularioAltaPortatil">ALTA DE PORTÁTILES</a>
       			</li>
       			<li class="nav-item">
-        			<a class="nav-link" href="<c:url value="mostrarPortatiles"/>">LISTA DE PORTÁTILES</a>
+        			<a class="nav-link" href="/prestamosVista/mostrarPortatiles">LISTA DE PORTÁTILES</a>
       			</li>
       			<li class="nav-item">
-        			<a class="nav-link" href="#">RELACIÓN ALUMNOS Y PORTÁTILES ASIGNADOS</a>
+        			<a class="nav-link" href="/prestamosVista/mostrarTodo">RELACIÓN ALUMNOS Y PORTÁTILES ASIGNADOS</a>
       			</li>
     		</ul>
  	 	</div>

@@ -30,7 +30,7 @@ import edu.prestamosVista.aplicacion.dto.PortatilesDTO;
 @Controller
 public class ControladorListaAlumnos {
 	
-protected final Log logger = LogFactory.getLog(getClass());
+	protected final Log logger = LogFactory.getLog(getClass());
 	
 	//Lista de Alumnos
 	List<Alumnos> listaAlumnos = new ArrayList<Alumnos>();
@@ -115,36 +115,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 	
 	
 	
-	//Ir a confirmar borrado en BorrarAlumno. Con la etiqueta PathVariable podemos obtener la id que le pasamos por URL
-	@RequestMapping(value="/confirmarBorradoAlumnos/{id_alumno}")
-	public String confirmarBorradoAlumnos(@PathVariable Integer id_alumno, Model model) {
-			
-		idSeleccionada = id_alumno;			
-		miModelo.put("idSeleccionada", idSeleccionada);
 	
-		model.addAttribute("dtoUtil", dtoUtil);
-
-		return "BorrarAlumno";
-	}
-		
-		//Metodo para borrar un alumno y generar mensaje de confirmacion. 
-		@RequestMapping(value="/confirmarBorradoAlumnos/borraAlumno", method = RequestMethod.POST)
-		public ModelAndView borraAlumno(@ModelAttribute("dtoUtil") DTOUtiles dtoUtil) {
-			
-			if(dtoUtil.getMensajeC().toUpperCase().equals("BORRAR")) {
-				
-				alumnoRepositorio.deleteById((Integer) miModelo.get("idSeleccionada"));
-				mensaje = "Alumno eliminado correctamente.";
-				
-			}
-			else {
-				mensaje = "No se ha realizado ningun cambio.";
-			}
-			
-			miModelo.put("mensaje", mensaje);
-				
-			return new ModelAndView("Confirmacion", "miModelo", miModelo);
-		}
 		
 	
 }

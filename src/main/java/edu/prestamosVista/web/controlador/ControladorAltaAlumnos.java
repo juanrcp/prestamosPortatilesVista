@@ -17,13 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.prestamosVista.aplicacion.dal.AlumnoRepositorio;
 import edu.prestamosVista.aplicacion.dal.Alumnos;
+import edu.prestamosVista.aplicacion.dal.Portatil;
+import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOaDAO;
 
 //Controlador que gestiona la comunicación entre modelo y vista de las altas de los alumnos
 @Controller
-public class ControladorAlumnos {
+public class ControladorAltaAlumnos {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 	
@@ -47,6 +49,9 @@ public class ControladorAlumnos {
 	@Autowired
 	AlumnoRepositorio alumnoRepositorio;
 	
+	@Autowired
+	PortatilRepositorio portatilRepositorio;
+	
 	
 	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo alumno vacio
 	@RequestMapping(value="/navegacionFormularioAltaAlumno")
@@ -63,10 +68,37 @@ public class ControladorAlumnos {
 	public ModelAndView altaAlumno(@ModelAttribute("nuevoAlumno") AlumnosDTO nuevoAlumnoDTO) {	
 		
 		DTOaDAO dtoadao = new DTOaDAO();
-				
-		alumnoRepositorio.save(dtoadao.alumnoDTOaDAO(nuevoAlumnoDTO));
+		
+		List<String> listaPortatilesOcupados = new ArrayList<>();
+		
+		Portatil portatilLibre = new Portatil();
+		
+		//Hacemos una lista con los identificadores de los portatiles ocupados
+		for(Alumnos alumnos: alumnoRepositorio.findAll()) {
 			
-		mensaje = "Alumno Guardado";
+			if(alumnos.getPortatil_asignado() != null)
+				listaPortatilesOcupados.add(alumnos.getPortatil_asignado().getNumero_identificador());
+		}
+		
+		//Revisamos si hay algun portatil libre comparandolos con los ocupados
+		for(Portatil portatil: portatilRepositorio.findAll()) {
+			if(!listaPortatilesOcupados.contains(portatil.getNumero_identificador())) {
+				portatilLibre = portatil;
+				mensaje = "Alumno guardado CON portatil asociado.";
+				break;
+			}
+			else {
+				portatilLibre = new Portatil();
+				mensaje = "Alumno guardado SIN Portatil asociado (no hay portatiles libres).";
+			}
+		}
+		
+		//Asignamos el portatil libre al primer alumno
+		nuevoAlumnoDTO.setPortatil_asignado(portatilLibre);
+		
+		//Guardamos al alumno con su partatil o no.
+		alumnoRepositorio.save(dtoadao.alumnoDTOaDAO(nuevoAlumnoDTO));		
+		
 
 		System.out.println("Alumno Guardado.");
 		miModelo.put("mensaje", mensaje);

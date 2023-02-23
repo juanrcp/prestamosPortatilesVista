@@ -12,20 +12,23 @@
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<br>
-	<h1>CONFIRMAR BORRADO</h1>
-	<h3>PARA BORRAR AL ALUMNO ESCRIBA: "BORRAR"</h3>
-	<br>
-	<form:form action="borraAlumno" method="POST" modelAttribute="dtoUtil">
- 		<ul>
-  			<li>
-    			<form:label path="mensajeC">¿BORRAR?:</form:label>
-    			<form:input type="text"  path="mensajeC"/>
-  			</li>
-  			<br>
-  			<li class="button">
-  				<button type="Submit">CONFIRMAR</button>
-			</li>
- 		</ul>
-	</form:form>
+	<div class="container">
+		<h1>CONFIRMAR BORRADO</h1>
+		<h3>PARA BORRAR AL ALUMNO ESCRIBA: "BORRAR"</h3>
+		<br>
+		<form:form action="borraAlumno" method="POST" modelAttribute="dtoUtil">
+ 			<ul>
+  				<li>
+    				<form:label path="mensajeC">¿BORRAR?:</form:label>
+    				<form:input type="text"  path="mensajeC"/>
+  				</li>
+  				<br>
+  				<li class="button">
+  					<button type="Submit">CONFIRMAR</button>
+				</li>
+ 			</ul>
+		</form:form>
+		<button onclick="history.back()">VOLVER A ATRAS</button>
+	</div>
 </body>
 </html>

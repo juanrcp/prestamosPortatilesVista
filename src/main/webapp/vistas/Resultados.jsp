@@ -11,20 +11,21 @@
 <body>
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
-	<br>
-	<h1>RELACION DE ASIGNACION</h1>
-	<br>
-	<c:if test="${miModelo.alumnoSeleccionado != null}">
-		<p>${miModelo.alumnoSeleccionado}</p>
-		<p>${miModelo.portatilAsignado}</p>
-	</c:if>	
-	<c:if test="${miModelo.alumnoPoseedor != null}">
-		<p>${miModelo.alumnoPoseedor}</p>
-		<p>${miModelo.portatilSeleccionado}</p>
-	</c:if>
-	
-	
-	<a href="prestamosVista/index">VOLVER AL INDEX</a>
-
+	<div class="container">
+		<br>
+		<h1>RELACION DE ASIGNACION</h1>
+		<br>
+		<c:if test="${miModelo.alumnoSeleccionado != null}">
+			<p>${miModelo.alumnoSeleccionado}</p>
+			<p>${miModelo.portatilAsignado}</p>
+		</c:if>	
+		<c:if test="${miModelo.alumnoPoseedor != null}">
+			<p>${miModelo.alumnoPoseedor}</p>
+			<p>${miModelo.portatilSeleccionado}</p>
+		</c:if>
+			
+		<br>
+		<a href="/prestamosVista/">VOLVER AL INICIO</a>
+	</div>
 </body>
 </html>

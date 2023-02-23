@@ -12,25 +12,28 @@
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<br>
-	<h1>FORMULARIO DE MATRICULACIÓN ALUMNOS</h1>
-	<br>
-	<br>
-	<form:form action="altaAlumno" method="POST" modelAttribute="nuevoAlumno">
- 		<ul>
-  			<li>
-    			<form:label path="nombre_alumno">NOMBRE COMPLETO:</form:label>
-    			<form:input type="text"  path="nombre_alumno"/>
-  			</li>
-  			<br>
-  			<li>
-    			<form:label path="telefono_alumno">TELEFONO:</form:label>
-    			<form:input type="number"  path="telefono_alumno"/>
-  			</li>
-  			<br>
-  			<li class="button">
-  				<button type="Submit">GUARDAR</button>
-			</li>
- 		</ul>
-	</form:form>
+	<div class="container">
+		<h1>FORMULARIO DE MATRICULACIÓN ALUMNOS</h1>
+		<br>
+		<br>
+		<form:form action="altaAlumno" method="POST" modelAttribute="nuevoAlumno">
+ 			<ul>
+  				<li>
+    				<form:label path="nombre_alumno">NOMBRE COMPLETO:</form:label>
+    				<form:input type="text"  path="nombre_alumno"/>
+  				</li>
+  				<br>
+  				<li>
+    				<form:label path="telefono_alumno">TELEFONO:</form:label>
+    				<form:input type="number"  path="telefono_alumno"/>
+  				</li>
+  				<br>
+  				<li class="button">
+  					<button type="Submit">GUARDAR</button>
+				</li>
+ 			</ul>
+		</form:form>
+  		<button onclick="history.back()">VOLVER A ATRAS</button>
+	</div>
 </body>
 </html>

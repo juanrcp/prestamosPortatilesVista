@@ -10,10 +10,14 @@
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<br>
-	<h1>¡ATENCIÓN!</h1>
-	<br>
-	<c:if test="${miModelo.mensaje != null}">
-		<h3><c:out value="${miModelo.mensaje}"></c:out></h3>
-	</c:if>
+	<div class="container">
+		<h1>¡ATENCIÓN!</h1>
+		<br>
+		<c:if test="${miModelo.mensaje != null}">
+			<h3><c:out value="${miModelo.mensaje}"></c:out></h3>
+		</c:if>
+		<br>
+		<a href="/prestamosVista/">VOLVER AL INICIO</a>
+	</div>
 </body>
 </html>
