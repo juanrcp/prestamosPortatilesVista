@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.prestamosVista.aplicacion.dal.AlumnoRepositorio;
@@ -42,7 +44,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 	String mensaje = null;
 	
 	//Id del alumno seleccionado
-	int idSeleccionada = 0;
+	long idSeleccionada = 0;
 
 	
 
@@ -77,13 +79,13 @@ protected final Log logger = LogFactory.getLog(getClass());
 		return new ModelAndView("ListaAlumnos", "miModelo", miModelo);
 	}
 	
-	@RequestMapping(value="/portatilDeAlumno")
-	public ModelAndView portatilDeAlumno(@ModelAttribute("idAlumno") int idAlumno) {
+	@RequestMapping(value="/portatilDeAlumno", method = RequestMethod.POST)
+	public ModelAndView portatilDeAlumno(@ModelAttribute ("idAlumno") long idAlumno) {
 	//Lista de portatiles para encontrar el portatil asignado. 
 	List<Portatil> listaPortatiles = new ArrayList<>();
 	
 	//Buscamos el alumno por su id y lo guardamos en el modelo
-	Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById(idAlumno);
+	Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById((int) idAlumno);
 	miModelo.put("alumnoSeleccionado", alumnoSeleccionado);
 	
 	PortatilesDTO portatilAsignado = new PortatilesDTO();
@@ -106,5 +108,39 @@ protected final Log logger = LogFactory.getLog(getClass());
 		
 		return new ModelAndView("Confirmacion", "miModelo", miModelo);
 	}
+	
+	
+	//Ir a confirmar borrado. Con la etiqueta PathVariable podemos obtener la id que le pasamos por URL
+	@RequestMapping(value="/confirmarBorradoAlumnos/{id_alumno}")
+	public String confirmarBorradoAlumnos(@PathVariable long id_alumno) {
+			
+		idSeleccionada = id_alumno;
+			
+		miModelo.put("idSeleccionada", idSeleccionada);
+				
+				
+		miModelo.put("mensajeC", mensaje);
+		//return new ModelAndView("BorrarAlumno", "miModelo", miModelo);
+		return "BorrarAlumno";
+	}
+		
+		//Metodo para borrar un alumno y generar mensaje de confirmacion. 
+		@RequestMapping(value="/borrarAlumno")
+		public ModelAndView borrarAlumno(@ModelAttribute("mensajeC") String mensajeC) {
+			
+			if(((String) miModelo.get("mensajeC")).toUpperCase() == "BORRAR") {
+				
+				alumnoRepositorio.deleteById((Integer) miModelo.get("idSeleccionada"));
+				mensaje = "Alumno eliminado correctamente.";
+				
+			}
+			else {
+				mensaje = "No se ha realizado ningun cambio.";
+			}
+			
+				
+			return new ModelAndView("Confirmacion", "miModelo", miModelo);
+		}
+		
 	
 }

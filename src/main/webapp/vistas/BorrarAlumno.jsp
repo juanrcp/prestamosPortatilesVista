@@ -18,8 +18,8 @@
 	<form:form action="borrarAlumno" method="POST" modelAttribute="mensajeC">
  		<ul>
   			<li>
-    			<form:label path="">¿BORRAR?:</form:label>
-    			<form:input type="text"  path=""/>
+    			<form:label path="mensajeC">¿BORRAR?:</form:label>
+    			<form:input type="text"  path="mensajeC"/>
   			</li>
   			<br>
   			<li class="button">

@@ -55,7 +55,7 @@
   			</li>
   			<br>
   			<li class="button">
-  				<button type="Submit">GUARDAR</button>
+  				<button type="Submit">CONSULTAR</button>
 			</li>
  		</ul>
 	</form:form>

@@ -72,40 +72,5 @@ public class ControladorAlumnos {
 		miModelo.put("mensaje", mensaje);
 		return new ModelAndView("Confirmacion", "miModelo", miModelo);
 	}
-	
-	
-	
-	//Ir a confirmar borrado. HAY QUE OBTENER DE LA URL EL ID 
-	@RequestMapping(value="/confirmarBorradoAlumnos")
-	public String confirmarBorradoAlumnos(@ModelAttribute("mensajeC") String mensajeC) {
-		
-		///////
-		
-		miModelo.put("idSeleccionada", idSeleccionada);
-		miModelo.put("mensajeC", mensajeC);
-			
-			
-		//return new ModelAndView("BorrarAlumno", "miModelo", miModelo);
-		return "BorrarAlumno";
-	}
-	
-	//Metodo para borrar un alumno y generar mensaje de confirmacion. 
-	@RequestMapping(value="/borrarAlumno")
-	public ModelAndView borrarAlumno() {
-		
-		if(((String) miModelo.get("mensajeC")).toUpperCase() == "BORRAR") {
-			
-			alumnoRepositorio.deleteById((Integer) miModelo.get("idSeleccionada"));
-			mensaje = "Alumno eliminado correctamente.";
-			
-		}
-		else {
-			mensaje = "No se ha realizado ningun cambio.";
-		}
-		
-			
-		return new ModelAndView("Confirmacion", "miModelo", miModelo);
-	}
-	
 
 }
