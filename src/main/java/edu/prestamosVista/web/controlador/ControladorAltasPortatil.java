@@ -29,6 +29,7 @@ public class ControladorAltasPortatil {
 	//Mensajes de confirmación
 	String mensaje = null;
 	
+	//Inyectamos interfaz
 	@Autowired
 	PortatilRepositorio portatilRopositorio;
 	

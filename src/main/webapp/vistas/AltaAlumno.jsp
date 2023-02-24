@@ -18,14 +18,14 @@
 		<br>
 		<form:form action="altaAlumno" method="POST" modelAttribute="nuevoAlumno">
  			<ul>
-  				<li>
+  				<li class="form-group">
     				<form:label path="nombre_alumno">NOMBRE COMPLETO:</form:label>
-    				<form:input type="text"  path="nombre_alumno"/>
+    				<form:input type="text" class="form-control" path="nombre_alumno"/>
   				</li>
   				<br>
-  				<li>
+  				<li class="form-group">
     				<form:label path="telefono_alumno">TELEFONO:</form:label>
-    				<form:input type="number"  path="telefono_alumno"/>
+    				<form:input type="number" class="form-control" path="telefono_alumno"/>
   				</li>
   				<br>
   				<li class="button">

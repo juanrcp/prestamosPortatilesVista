@@ -24,14 +24,12 @@ import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
 import edu.prestamosVista.aplicacion.dto.PortatilesDTO;
+import edu.prestamosVista.web.servicios.Consultas;
 
 @Controller
 public class ControladorListaPortatiles {
 
 protected final Log logger = LogFactory.getLog(getClass());
-	
-	//Lista de Alumnos
-	List<Portatil> listaPortatiles = new ArrayList<Portatil>();
 	
 	//Lista de AlumnosDTO
 	List<PortatilesDTO> listaPortatilesDTO = new ArrayList<PortatilesDTO>();
@@ -46,12 +44,9 @@ protected final Log logger = LogFactory.getLog(getClass());
 	String mensaje = null;
 
 
-	//Inyectamos interfaz
+	//Inyectamos consultas	
 	@Autowired
-	PortatilRepositorio portatilRepositorio;
-	
-	@Autowired
-	AlumnoRepositorio alumnoRepositorio;
+	Consultas consultas;
 	
 
 	//Metodo que extrae a todos los portatiles y mostrarlos
@@ -62,7 +57,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 		List<PortatilesDTO> listaPortatilesDTOaux = new ArrayList<PortatilesDTO>();
 		DAOaDTO daoadto = new DAOaDTO();
 	
-		for (Portatil portatil : portatilRepositorio.findAll()) {
+		for (Portatil portatil : consultas.listarTodosPortatiles()) {
 		
 			listaPortatilesDTOaux.add(daoadto.portatiDAOaDTO(portatil));		
 		}
@@ -77,21 +72,24 @@ protected final Log logger = LogFactory.getLog(getClass());
 		return new ModelAndView("ListaPortatiles", "miModelo", miModelo);
 	}
 	
-	//Metodo para buscar mostrar el alumno que tiene el portatil X segun su codeigo de registro.
-		@RequestMapping(value="/alumnodePortatil", method = RequestMethod.POST)
-		public ModelAndView portatilDeAlumno(@ModelAttribute ("dtoUtil") DTOUtiles dtoUtil) {
+	
+	//Metodo para mostrar el alumno que tiene el portatil X segun su codeigo de registro.
+	@RequestMapping(value="/alumnodePortatil", method = RequestMethod.POST)
+	public ModelAndView portatilDeAlumno(@ModelAttribute ("dtoUtil") DTOUtiles dtoUtil) {
 		
 		DAOaDTO daoadto = new DAOaDTO();
 		
 		//Buscamos el portatil por su codigo y lo guardamos en el modelo
-		Optional<Portatil> portatilSeleccionado = portatilRepositorio.findById(dtoUtil.getMensajeC());
+		//Optional<Portatil> portatilSeleccionado = portatilRepositorio.findById(dtoUtil.getMensajeC());
+		Optional<Portatil> portatilSeleccionado = consultas.buscaPortatil(dtoUtil.getMensajeC());
 		
 		miModelo.put("alumnoSeleccionado", daoadto.portatiDAOaDTO(portatilSeleccionado.get()));
 		
-		AlumnosDTO alumnoPoseedor = new AlumnosDTO();
+		//Alumno poseedor del portatil
+		AlumnosDTO alumnoPoseedor = new AlumnosDTO();		
 		
-		
-		for (Alumnos alumno : alumnoRepositorio.findAll()) {
+		//Buscamos entre todos los alumnos el que tenga el codigo de referencia de portatil igual al que le hemos dado
+		for (Alumnos alumno : consultas.listarTodosAlumnos()) {
 			
 			if(alumno.getPortatil_asignado().getNumero_identificador().equals(portatilSeleccionado.get().getNumero_identificador())) {
 				alumnoPoseedor = daoadto.alumnoDAOaDTO(alumno);

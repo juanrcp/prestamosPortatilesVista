@@ -22,6 +22,7 @@ import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOaDAO;
+import edu.prestamosVista.web.servicios.Consultas;
 
 //Controlador que gestiona la comunicación entre modelo y vista de las altas de los alumnos
 @Controller
@@ -29,28 +30,20 @@ public class ControladorAltaAlumnos {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 	
-	//Lista de Alumnos
-	List<Alumnos> listaAlumnos = new ArrayList<Alumnos>();
-	
-	//Lista de AlumnosDTO
-	List<AlumnosDTO> listaAlumnosDTO = new ArrayList<AlumnosDTO>();
-	
 	//Creacion de modelo
 	Map<String, Object> miModelo = new HashMap<String, Object>();
 	
 	//Mensajes de confirmación
 	String mensaje = null;
 	
-	//Id del alumno seleccionado
-	int idSeleccionada = 0;
-	
 
 	//Inyectamos interfaz
 	@Autowired
 	AlumnoRepositorio alumnoRepositorio;
 	
+	//Inyectamos consultas
 	@Autowired
-	PortatilRepositorio portatilRepositorio;
+	Consultas consultas;
 	
 	
 	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo alumno vacio
@@ -69,19 +62,22 @@ public class ControladorAltaAlumnos {
 		
 		DTOaDAO dtoadao = new DTOaDAO();
 		
+		//Lista de portatiles acupados
 		List<String> listaPortatilesOcupados = new ArrayList<>();
 		
+		//Portatil libre
 		Portatil portatilLibre = new Portatil();
 		
 		//Hacemos una lista con los identificadores de los portatiles ocupados
-		for(Alumnos alumnos: alumnoRepositorio.findAll()) {
+		for(Alumnos alumnos: consultas.listarTodosAlumnos()) {
 			
 			if(alumnos.getPortatil_asignado() != null)
 				listaPortatilesOcupados.add(alumnos.getPortatil_asignado().getNumero_identificador());
 		}
 		
 		//Revisamos si hay algun portatil libre comparandolos con los ocupados
-		for(Portatil portatil: portatilRepositorio.findAll()) {
+		for(Portatil portatil: consultas.listarTodosPortatiles()) {
+			
 			if(!listaPortatilesOcupados.contains(portatil.getNumero_identificador())) {
 				portatilLibre = portatil;
 				mensaje = "Alumno guardado CON portatil asociado.";

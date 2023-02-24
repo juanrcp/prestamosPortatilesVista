@@ -25,15 +25,11 @@ import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
 import edu.prestamosVista.aplicacion.dto.PortatilesDTO;
+import edu.prestamosVista.web.servicios.Consultas;
 
 //Controlador que gestiona la comunicación entre modelo y vista de la lista de los alumnos
 @Controller
 public class ControladorListaAlumnos {
-	
-	protected final Log logger = LogFactory.getLog(getClass());
-	
-	//Lista de Alumnos
-	List<Alumnos> listaAlumnos = new ArrayList<Alumnos>();
 	
 	//Lista de AlumnosDTO
 	List<AlumnosDTO> listaAlumnosDTO = new ArrayList<AlumnosDTO>();
@@ -44,19 +40,12 @@ public class ControladorListaAlumnos {
 	//Mensajes de confirmación
 	String mensaje = null;
 	
-	//Id elegida del Alumno para borrarlo 
-	int idSeleccionada = 0;
-	
 	//Util para pasar informacion desde los formularios
 	DTOUtiles dtoUtil = new DTOUtiles();
 
-
-	//Inyectamos interfaz
+	//Inyeccion de las consultas
 	@Autowired
-	AlumnoRepositorio alumnoRepositorio;
-	
-	@Autowired
-	PortatilRepositorio portatilRepositorio;
+	Consultas consultas;
 	
 
 	//Metodo que extrae a todos los alumnos y los muestra
@@ -67,13 +56,15 @@ public class ControladorListaAlumnos {
 		List<AlumnosDTO> listaAlumnosDTOaux = new ArrayList<>();
 		DAOaDTO daoadto = new DAOaDTO();
 	
-		for (Alumnos alumnos : alumnoRepositorio.findAll()) {
+		for (Alumnos alumnos : consultas.listarTodosAlumnos()) {
 		
 			listaAlumnosDTOaux.add(daoadto.alumnoDAOaDTO(alumnos));		
 		}
 		
 		//Guardamos la lista dentro de la lista final.
 		listaAlumnosDTO = listaAlumnosDTOaux;
+		
+		//listaAlumnosDTOaux.clear();
 	
 		model.addAttribute("dtoUtil", dtoUtil);
 	
@@ -82,40 +73,36 @@ public class ControladorListaAlumnos {
 		return new ModelAndView("ListaAlumnos", "miModelo", miModelo);
 	}
 	
+	
 	//Metodo para buscar portatil mediante el ID del alumno
 	@RequestMapping(value="/portatilDeAlumno", method = RequestMethod.POST)
 	public ModelAndView portatilDeAlumno(@ModelAttribute ("dtoUtil") DTOUtiles dtoUtil) {
 	
-	DAOaDTO daoadto = new DAOaDTO();
+		DAOaDTO daoadto = new DAOaDTO();
 	
-	//Buscamos el alumno por su id y lo guardamos en el modelo
-	Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById(dtoUtil.getIdSeleccionado());
+		//Buscamos el alumno por su id y lo guardamos en el modelo
+		//Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById(dtoUtil.getIdSeleccionado());
+		Optional<Alumnos> alumnoSeleccionado = consultas.buscaAlumno(dtoUtil.getIdSeleccionado());
+		miModelo.put("alumnoSeleccionado", daoadto.alumnoDAOaDTO(alumnoSeleccionado.get()));
 	
-	miModelo.put("alumnoSeleccionado", daoadto.alumnoDAOaDTO(alumnoSeleccionado.get()));
+		//Aqui guardamos el potatil que tenga asignado.
+		PortatilesDTO portatilAsignado = new PortatilesDTO();
 	
-	PortatilesDTO portatilAsignado = new PortatilesDTO();
 	
-	
-	for (Portatil portatil : portatilRepositorio.findAll()) {
+		for (Portatil portatil : consultas.listarTodosPortatiles()) {
 		
-		if(portatil.getNumero_identificador().equals(alumnoSeleccionado.get().getPortatil_asignado().getNumero_identificador())) {
-			portatilAsignado = daoadto.portatiDAOaDTO(portatil);
+			//Buscamos el portatil cuya referencia sea correspondiente a la del portatil asignado al alumno
+			if(portatil.getNumero_identificador().equals(alumnoSeleccionado.get().getPortatil_asignado().getNumero_identificador())) {
+				portatilAsignado = daoadto.portatiDAOaDTO(portatil);
+			}
+			else {
+				mensaje = "El alumno no tiene un portatil asignado";
+				miModelo.put("mensaje", mensaje);
+			}
 		}
-		else {
-			mensaje = "El alumno no tiene un portatil asignado";
-			miModelo.put("mensaje", mensaje);
-		}
-	}
 	
-	miModelo.put("portatilAsignado", portatilAsignado);
+		miModelo.put("portatilAsignado", portatilAsignado);
 		
 		return new ModelAndView("Resultados", "miModelo", miModelo);
-	}
-	
-	
-	
-	
-	
-		
-	
+	}	
 }

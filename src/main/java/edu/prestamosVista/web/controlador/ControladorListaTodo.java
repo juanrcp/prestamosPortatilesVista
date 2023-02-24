@@ -22,6 +22,7 @@ import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
 import edu.prestamosVista.aplicacion.dto.PortatilesDTO;
+import edu.prestamosVista.web.servicios.Consultas;
 
 @Controller
 public class ControladorListaTodo {
@@ -36,12 +37,9 @@ public class ControladorListaTodo {
 		Map<String, Object> miModelo = new HashMap<String, Object>();
 
 
-		//Inyectamos interfaz
+		//Inyectamos consultas		
 		@Autowired
-		AlumnoRepositorio alumnoRepositorio;
-		
-		@Autowired
-		PortatilRepositorio portatilRepositorio;
+		Consultas consulta;		
 		
 
 		//Metodo que extrae a todos los alumnos y los muestra
@@ -53,9 +51,10 @@ public class ControladorListaTodo {
 			
 			DAOaDTO daoadto = new DAOaDTO();
 			
+			//Portatil asignado al alumno
 			PortatilesDTO portatilAsignado = new PortatilesDTO();
 		
-			for (Alumnos alumnos : alumnoRepositorio.findAll()) {
+			for (Alumnos alumnos : consulta.listarTodosAlumnos()) {
 			
 				if(alumnos.getPortatil_asignado() != null) {
 					listaAsignaciones.add(daoadto.alumnoDAOaDTO(alumnos).toString() + " - Portatil asignado: " + daoadto.portatiDAOaDTO(alumnos.getPortatil_asignado()).toString());				

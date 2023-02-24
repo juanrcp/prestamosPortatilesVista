@@ -29,12 +29,6 @@ public class ControladorBorrarAlumno {
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	
-	//Lista de Alumnos
-	List<Alumnos> listaAlumnos = new ArrayList<Alumnos>();
-	
-	//Lista de AlumnosDTO
-	List<AlumnosDTO> listaAlumnosDTO = new ArrayList<AlumnosDTO>();
-	
 	//Creacion de modelo
 	Map<String, Object> miModelo = new HashMap<String, Object>();
 	
@@ -56,7 +50,9 @@ public class ControladorBorrarAlumno {
 	//Ir a confirmar borrado en BorrarAlumno. Con la etiqueta PathVariable podemos obtener la id que le pasamos por URL
 	@RequestMapping(value="/confirmarBorradoAlumnos/{id_alumno}")
 	public String confirmarBorradoAlumnos(@PathVariable Integer id_alumno, Model model) {
-				
+		
+		logger.info("Navegamos a la confirmacion del borrado.");		
+		
 		idSeleccionada = id_alumno;			
 		miModelo.put("idSeleccionada", idSeleccionada);
 		
