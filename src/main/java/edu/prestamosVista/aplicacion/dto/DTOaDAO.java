@@ -26,6 +26,13 @@ public class DTOaDAO {
 		
 	//Metodo para convertir a los portatilesDTO a DAO
 	public Portatil portatiDTOaDAO(PortatilesDTO port) {
-		return new Portatil(port.getNumero_identificador(), port.getMarca(), port.getModelo());
+		
+		//Obtenemos fecha para actualizar el metadato
+		Date fecha = new Date();
+				 
+		System.out.println(fecha);
+		
+		return new Portatil(port.getNumero_identificador(), port.getMarca(), port.getModelo(), ("Portatil-" + fecha));
+		
 	}
 }
