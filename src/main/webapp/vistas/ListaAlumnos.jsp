@@ -6,7 +6,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Lista Alumnos</title>
+<title>LISTA ALUMNOS</title>
+
+<style type="text/css">
+
+body{
+	
+	text-align: center;
+	
+}
+
+table {
+	text-align: center;
+}
+
+ul {
+	list-style:none;
+}
+
+table {
+
+	<!-- No reconoce esto voy por aqui -->
+	border-spacing: 20px;
+}
+
+</style>
 </head>
 <body>
 <!-- Importamos el menu -->
@@ -37,7 +61,7 @@
 							<c:out value="${alumno.telefono_alumno}"></c:out>
 						</td>
 						<td>
-							<a id="idSeleccionada" href="<c:url value="confirmarBorradoAlumnos/${alumno.id_alumno}"/>">BORRAR</a>
+							<a class="btn btn-danger" id="idSeleccionada" href="<c:url value="confirmarBorradoAlumnos/${alumno.id_alumno}"/>">BORRAR</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -49,14 +73,14 @@
 		<h3>Introduzca el ID del Alumno para ver su Portatil asignado:</h3>
 		<br>
 		<form:form action="portatilDeAlumno" method="POST" modelAttribute="dtoUtil">
- 			<ul>
+ 			<ul style="list-style:none">
   				<li>
     				<form:label path="idSeleccionado">ID del Alumno:</form:label>
     				<form:input type="number"  path="idSeleccionado"/>
   				</li>
   				<br>
   				<li class="button">
-  					<button type="Submit">CONSULTAR</button>
+  					<button class="btn btn-primary" type="Submit">CONSULTAR</button>
 				</li>
  			</ul>
 		</form:form>

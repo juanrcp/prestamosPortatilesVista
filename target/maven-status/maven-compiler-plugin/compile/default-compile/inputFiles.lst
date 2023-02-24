@@ -1,17 +1,19 @@
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorListaPortatiles.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\PortatilesDTO.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorAlumnos.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\AplicacionConfiguracionContexto.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dal\AlumnoRepositorio.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dal\Alumnos.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dal\Portatil.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\AlumnosDTO.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\WebConfiguracionContexto.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\DAOaDTO.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\EnrutadorEjemploWeb.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\DTOaDAO.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\DTOUtiles.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorListaAlumnos.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorAltasPortatil.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorListaTodo.java
-C:\Users\bora4\Desktop\PROYECTOS ECLIPSE\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dal\PortatilRepositorio.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dal\PortatilRepositorio.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorListaAlumnos.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorListaPortatiles.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\EnrutadorEjemploWeb.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dal\AlumnoRepositorio.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\PortatilesDTO.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\AplicacionConfiguracionContexto.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dal\Portatil.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\WebConfiguracionContexto.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dal\Alumnos.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorAltaAlumnos.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\DTOUtiles.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\AlumnosDTO.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\DTOaDAO.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorAltasPortatil.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\aplicacion\dto\DAOaDTO.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorListaTodo.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\controlador\ControladorBorrarAlumno.java
+C:\Users\Juan Ramon Canto\Desktop\proyectosEclipse\prestamosPortatilesVista\src\main\java\edu\prestamosVista\web\servicios\Consultas.java

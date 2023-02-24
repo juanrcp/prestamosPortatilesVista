@@ -36,10 +36,6 @@ public class ControladorAltaAlumnos {
 	//Mensajes de confirmación
 	String mensaje = null;
 	
-
-	//Inyectamos interfaz
-	@Autowired
-	AlumnoRepositorio alumnoRepositorio;
 	
 	//Inyectamos consultas
 	@Autowired
@@ -49,6 +45,7 @@ public class ControladorAltaAlumnos {
 	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo alumno vacio
 	@RequestMapping(value="/navegacionFormularioAltaAlumno")
 	public String navegacionFormularioAltaAlumno(Model modelo) {
+		
 		logger.info("Navegamos al formulario de Alta");
 		AlumnosDTO nuevoAlumnoDTO = new AlumnosDTO();		
 		
@@ -84,7 +81,7 @@ public class ControladorAltaAlumnos {
 				break;
 			}
 			else {
-				portatilLibre = new Portatil();
+				portatilLibre = null;
 				mensaje = "Alumno guardado SIN Portatil asociado (no hay portatiles libres).";
 			}
 		}
@@ -93,7 +90,7 @@ public class ControladorAltaAlumnos {
 		nuevoAlumnoDTO.setPortatil_asignado(portatilLibre);
 		
 		//Guardamos al alumno con su partatil o no.
-		alumnoRepositorio.save(dtoadao.alumnoDTOaDAO(nuevoAlumnoDTO));		
+		consultas.guardaAlumno(dtoadao.alumnoDTOaDAO(nuevoAlumnoDTO));
 		
 
 		System.out.println("Alumno Guardado.");

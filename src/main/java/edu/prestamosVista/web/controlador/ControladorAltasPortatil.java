@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.DTOaDAO;
 import edu.prestamosVista.aplicacion.dto.PortatilesDTO;
+import edu.prestamosVista.web.servicios.Consultas;
 
 //Controlador que gestiona la comunicación entre modelo y vista de las altas de los portatiles
 @Controller
@@ -29,9 +30,11 @@ public class ControladorAltasPortatil {
 	//Mensajes de confirmación
 	String mensaje = null;
 	
-	//Inyectamos interfaz
+	
+	//Inyeccion de consulta
 	@Autowired
-	PortatilRepositorio portatilRopositorio;
+	Consultas consultas;
+	
 	
 	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo portatil vacio
 	@RequestMapping(value="/navegacionFormularioAltaPortatil")
@@ -49,7 +52,7 @@ public class ControladorAltasPortatil {
 				
 		DTOaDAO dtoadao = new DTOaDAO();
 						
-		portatilRopositorio.save(dtoadao.portatiDTOaDAO(nuevoPortatilDTO));
+		consultas.guardaPortatil(dtoadao.portatiDTOaDAO(nuevoPortatilDTO));
 					
 		mensaje = "Portatil Guardado";
 

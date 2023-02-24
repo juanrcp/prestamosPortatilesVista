@@ -6,7 +6,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LISTA PORTATILES</title>
+<title>LISTA PORTÁTILES</title>
+
+<style type="text/css">
+
+body{
+	
+	text-align: center;
+	
+}
+
+table {
+	text-align: center;
+}
+
+ul {
+	list-style:none;
+}
+
+</style>
 </head>
 <body>
 	<!-- Importamos el menu -->
@@ -45,14 +63,14 @@
 		<h3>Introduzca el NUMERO IDENTIFICADOR del Portatil para ver a que Alumno ha sido asignado:</h3>
 		<br>
 		<form:form action="alumnodePortatil" method="POST" modelAttribute="dtoUtil">
-	 		<ul>
+	 		<ul style="list-style:none">
 	  			<li>
 	    			<form:label path="mensajeC">CODIGO REFERENCIA PORTATIL:</form:label>
 	    			<form:input type="text"  path="mensajeC"/>
 	  			</li>
 	  			<br>
 	  			<li class="button">
-	  				<button type="Submit">CONSULTAR</button>
+	  				<button class="btn btn-primary" type="Submit">CONSULTAR</button>
 				</li>
 	 		</ul>
 		</form:form>

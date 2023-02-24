@@ -7,6 +7,24 @@
 <head>
 <meta charset="UTF-8">
 <title>TODAS LAS ASIGNACIONES</title>
+
+<style type="text/css">
+
+body{
+	
+	text-align: center;
+	
+}
+
+table {
+	text-align: center;
+}
+
+ul {
+	list-style:none;
+}
+
+</style>
 </head>
 <body>
 	<!-- Importamos el menu -->
@@ -32,7 +50,7 @@
 			</tbody>
 		</table>
 		<br>
-		<a href="/prestamosVista/">VOLVER AL INICIO</a>
+		<a class="btn btn-primary" href="/prestamosVista/">VOLVER AL INICIO</a>
 	</div>
 </body>
 </html>

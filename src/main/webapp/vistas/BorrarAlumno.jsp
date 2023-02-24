@@ -6,7 +6,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BORRAR ALUMNO</title>
+
+<style type="text/css">
+
+body{
+	
+	text-align: center;
+	
+}
+
+table {
+	text-align: center;
+}
+
+ul {
+	list-style:none;
+}
+
+</style>
 </head>
 <body>
 	<!-- Importamos el menu -->
@@ -17,18 +35,18 @@
 		<h3>PARA BORRAR AL ALUMNO ESCRIBA: "BORRAR"</h3>
 		<br>
 		<form:form action="borraAlumno" method="POST" modelAttribute="dtoUtil">
- 			<ul>
+ 			<ul style="list-style:none">
   				<li>
     				<form:label path="mensajeC">¿BORRAR?:</form:label>
     				<form:input type="text"  path="mensajeC"/>
   				</li>
   				<br>
   				<li class="button">
-  					<button type="Submit">CONFIRMAR</button>
+  					<button class="btn btn-danger" type="Submit">CONFIRMAR</button>
 				</li>
  			</ul>
 		</form:form>
-		<button onclick="history.back()">VOLVER A ATRAS</button>
+		<button type="button" class="btn btn-primary" onclick="history.back()">VOLVER A ATRAS</button>
 	</div>
 </body>
 </html>

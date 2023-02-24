@@ -4,7 +4,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Confirmación</title>
+<title>CONFIRMACIÓN</title>
+
+<style type="text/css">
+
+body{
+	
+	text-align: center;
+	
+}
+
+table {
+	text-align: center;
+}
+
+ul {
+	list-style:none;
+}
+
+</style>
 </head>
 <body>
 	<!-- Importamos el menu -->
@@ -17,7 +35,7 @@
 			<h3><c:out value="${miModelo.mensaje}"></c:out></h3>
 		</c:if>
 		<br>
-		<a href="/prestamosVista/">VOLVER AL INICIO</a>
+		<a class="btn btn-primary" href="/prestamosVista/">VOLVER AL INICIO</a>
 	</div>
 </body>
 </html>

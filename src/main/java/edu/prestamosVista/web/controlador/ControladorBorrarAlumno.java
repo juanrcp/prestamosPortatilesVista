@@ -21,6 +21,7 @@ import edu.prestamosVista.aplicacion.dal.Alumnos;
 import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
+import edu.prestamosVista.web.servicios.Consultas;
 
 //Controlador para ir a BorrarAlumno y borrarlo
 @Controller
@@ -40,11 +41,11 @@ public class ControladorBorrarAlumno {
 	
 	//Util para pasar informacion desde los formularios
 	DTOUtiles dtoUtil = new DTOUtiles();
-
-
-	//Inyectamos interfaz
+	
+	
+	//Inyectamos consultas
 	@Autowired
-	AlumnoRepositorio alumnoRepositorio;
+	Consultas consultas;
 	
 	
 	//Ir a confirmar borrado en BorrarAlumno. Con la etiqueta PathVariable podemos obtener la id que le pasamos por URL
@@ -64,10 +65,11 @@ public class ControladorBorrarAlumno {
 	//Metodo para borrar un alumno y generar mensaje de confirmacion. 
 	@RequestMapping(value="/confirmarBorradoAlumnos/borraAlumno", method = RequestMethod.POST)
 	public ModelAndView borraAlumno(@ModelAttribute("dtoUtil") DTOUtiles dtoUtil) {
-				
+		
+		//Comprobamos la palabra clave para borrar. Si no se reconoce no se hace ningun cambio
 		if(dtoUtil.getMensajeC().toUpperCase().equals("BORRAR")) {
-					
-			alumnoRepositorio.deleteById((Integer) miModelo.get("idSeleccionada"));
+			
+			consultas.borraAlumnoporID((Integer) miModelo.get("idSeleccionada"));
 			mensaje = "Alumno eliminado correctamente.";
 					
 		}
