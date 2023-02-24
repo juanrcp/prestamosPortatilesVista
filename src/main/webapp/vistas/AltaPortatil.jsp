@@ -10,12 +10,6 @@
 
 <style type="text/css">
 
-body{
-	
-	text-align: center;
-	
-}
-
 table {
 	text-align: center;
 }
@@ -26,13 +20,13 @@ ul {
 
 form {
 	text-align: center;
-	margin-left: 30%;
-	width: 400px;
+	width: 450px;
+	margin-top: 350px;
 }
 
 </style>
 </head>
-<body>
+<body style="background-color: lime; text-align: center;">
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<br>
@@ -40,7 +34,8 @@ form {
 		<h1>FORMULARIO DE ALTA PORTATILES</h1>
 		<br>
 		<br>
-		<div class="formulario">
+		<div class="position-relative">
+		<div class="position-absolute top-50 start-50 translate-middle">
 			<form:form action="altaPortatil" method="POST" modelAttribute="nuevoPortatil">
  			<ul style="list-style:none">
   				<li class="form-group">
@@ -63,8 +58,9 @@ form {
 				</li>
  			</ul>
 		</form:form>
-		</div>
 		<button type="button" class="btn btn-primary" onclick="history.back()">VOLVER A ATRAS</button>
+		</div>
+		</div>
 	</div>
 </body>
 </html>

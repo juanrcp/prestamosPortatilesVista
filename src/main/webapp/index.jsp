@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <title>Prestamos de Portatiles</title>
 </head>
-<body>
+<body style="background-color: lime; text-align: center;">
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
-	<div class="container">
+	<div class="container" style="background-color: lime; text-align: center; margin-top: 15%;">
 		<br>
 		<h1>BIENVENIDO A LA GESTION DE PORTATILES POR ALUMNOS</h1>
 	</div>

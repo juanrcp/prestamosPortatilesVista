@@ -10,12 +10,6 @@
 
 <style type="text/css">
 
-body{
-	
-	text-align: center;
-	
-}
-
 table {
 	text-align: center;
 }
@@ -26,20 +20,22 @@ ul {
 
 form {
 	text-align: center;
-	margin-left: 30%;
-	width: 400px;
+	width: 450px;
+	margin-top: 350px;
+ 
 }
 
 </style>
 </head>
-<body>
+<body style="background-color: lime; text-align: center;">
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<br>
-	<div class="container">
+	<div class="position-relative">
 		<h1>FORMULARIO DE MATRICULACIÓN ALUMNOS</h1>
 		<br>
 		<br>
+		<div class="position-absolute top-50 start-50 translate-middle">
 		<form:form action="altaAlumno" method="POST" modelAttribute="nuevoAlumno">
  			<ul>
   				<li class="form-group">
@@ -58,6 +54,7 @@ form {
  			</ul>
 		</form:form>
   		<button type="button" class="btn btn-primary" onclick="history.back()">VOLVER A ATRAS</button>
+		</div>
 	</div>
 </body>
 </html>

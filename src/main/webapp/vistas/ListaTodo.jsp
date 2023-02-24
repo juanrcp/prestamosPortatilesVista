@@ -10,12 +10,6 @@
 
 <style type="text/css">
 
-body{
-	
-	text-align: center;
-	
-}
-
 table {
 	text-align: center;
 }
@@ -26,17 +20,17 @@ ul {
 
 </style>
 </head>
-<body>
+<body style="background-color: lime; text-align: center;">
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<div class="container">
 		<br>
 		<h1>LISTA DE ASIGNACIONES ALUMNOS-PORTÁTILES</h1>
 		<br>
-		<table>
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ASIGNACIONES</th>
+					<th scope="col">ASIGNACIONES</th>
 				</tr>
 			</thead>
 			<tbody>

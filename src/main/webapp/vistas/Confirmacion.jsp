@@ -8,12 +8,6 @@
 
 <style type="text/css">
 
-body{
-	
-	text-align: center;
-	
-}
-
 table {
 	text-align: center;
 }
@@ -24,7 +18,7 @@ ul {
 
 </style>
 </head>
-<body>
+<body style="background-color: lime; text-align: center;">
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<br>

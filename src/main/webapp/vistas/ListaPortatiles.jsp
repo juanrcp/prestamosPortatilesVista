@@ -10,12 +10,6 @@
 
 <style type="text/css">
 
-body{
-	
-	text-align: center;
-	
-}
-
 table {
 	text-align: center;
 }
@@ -26,19 +20,19 @@ ul {
 
 </style>
 </head>
-<body>
+<body  style="background-color: lime; text-align: center;">
 	<!-- Importamos el menu -->
 	<%@ include file="/vistas/menu.jsp"%>
 	<div class="container">
 		<br>
 		<h1>LISTA DE PORTATILES</h1>
 		<br>
-		<table>
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>CODIGO DE REGISTRO</th>
-					<th>MARCA</th>
-					<th>MODELO</th>
+					<th scope="row">CODIGO DE REGISTRO</th>
+					<th scope="row">MARCA</th>
+					<th scope="row">MODELO</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,7 +54,7 @@ ul {
 		<br>
 		<br>
 		<h2>CONSULTAR ALUMNO</h2>
-		<h3>Introduzca el NUMERO IDENTIFICADOR del Portatil para ver a que Alumno ha sido asignado:</h3>
+		<h3>Introduzca el CÓDIGO IDENTIFICADOR del Portatil para ver a que Alumno ha sido asignado:</h3>
 		<br>
 		<form:form action="alumnodePortatil" method="POST" modelAttribute="dtoUtil">
 	 		<ul style="list-style:none">
