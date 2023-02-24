@@ -81,7 +81,7 @@ public class AlumnosDTO {
 	//ToString
 	@Override
 	public String toString() {
-		return " Alumno => [id_alumno=" + id_alumno + ", nombre_alumno=" + nombre_alumno + ", telefono_alumno="
-				+ telefono_alumno + "]";
+		return " ALUMNO => ID del Alumno: " + id_alumno + ", NOMBRE COMPLETO: " + nombre_alumno + ", TELEFONO: "
+				+ telefono_alumno;
 	}
 }

@@ -1,8 +1,6 @@
 package edu.prestamosVista.web.controlador;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -16,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.prestamosVista.aplicacion.dal.AlumnoRepositorio;
-import edu.prestamosVista.aplicacion.dal.Alumnos;
-import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
-import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
 import edu.prestamosVista.web.servicios.Consultas;
 
@@ -52,37 +46,60 @@ public class ControladorBorrarAlumno {
 	@RequestMapping(value="/confirmarBorradoAlumnos/{id_alumno}")
 	public String confirmarBorradoAlumnos(@PathVariable Integer id_alumno, Model model) {
 		
-		logger.info("Navegamos a la confirmacion del borrado.");		
-		
-		idSeleccionada = id_alumno;			
-		miModelo.put("idSeleccionada", idSeleccionada);
-		
-		model.addAttribute("dtoUtil", dtoUtil);
+		try {
+			
+			logger.info("Navegamos a la confirmación del borrado.");		
+			
+			idSeleccionada = id_alumno;			
+			miModelo.put("idSeleccionada", idSeleccionada);
+			
+			model.addAttribute("dtoUtil", dtoUtil);
 
-		return "BorrarAlumno";
+			return "BorrarAlumno";
+			
+			
+		} catch (Exception e) {
+
+			logger.info("¡ERROR! Se ha producido un error. Acción NO realizada. Vuelva al Inicio.");
+			
+			return "index";
+			
+		}
 	}
 			
 	//Metodo para borrar un alumno y generar mensaje de confirmacion. 
 	@RequestMapping(value="/confirmarBorradoAlumnos/borraAlumno", method = RequestMethod.POST)
 	public ModelAndView borraAlumno(@ModelAttribute("dtoUtil") DTOUtiles dtoUtil) {
 		
-		//Comprobamos la palabra clave para borrar. Si no se reconoce no se hace ningun cambio
-		if(dtoUtil.getMensajeC().toUpperCase().equals("BORRAR")) {
+		try {
 			
-			consultas.borraAlumnoporID((Integer) miModelo.get("idSeleccionada"));
-			mensaje = "Alumno eliminado correctamente.";
+			//Comprobamos la palabra clave para borrar. Si no se reconoce no se hace ningun cambio
+			if(dtoUtil.getMensajeC().toUpperCase().equals("BORRAR")) {
+				
+				consultas.borraAlumnoporID((Integer) miModelo.get("idSeleccionada"));
+				mensaje = "Alumno eliminado correctamente.";
+						
+			}
+			else {
+				mensaje = "No se ha realizado ningun cambio.";
+				miModelo.put("mensaje", mensaje);
+				
+				return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			}
 					
-		}
-		else {
-			mensaje = "No se ha realizado ningun cambio.";
+			miModelo.put("mensaje", mensaje);
+						
+			return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			
+			
+		} catch (Exception e) {
+
+			mensaje = "¡ERROR! Se ha producido un error. Acción NO realizada. Vuelva al Inicio.";
+			
 			miModelo.put("mensaje", mensaje);
 			
 			return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			
 		}
-				
-		miModelo.put("mensaje", mensaje);
-					
-		return new ModelAndView("Confirmacion", "miModelo", miModelo);
 	}
-
 }

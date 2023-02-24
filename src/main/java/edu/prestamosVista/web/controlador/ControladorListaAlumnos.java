@@ -6,21 +6,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.prestamosVista.aplicacion.dal.AlumnoRepositorio;
 import edu.prestamosVista.aplicacion.dal.Alumnos;
 import edu.prestamosVista.aplicacion.dal.Portatil;
-import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DAOaDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
@@ -78,31 +73,45 @@ public class ControladorListaAlumnos {
 	@RequestMapping(value="/portatilDeAlumno", method = RequestMethod.POST)
 	public ModelAndView portatilDeAlumno(@ModelAttribute ("dtoUtil") DTOUtiles dtoUtil) {
 	
-		DAOaDTO daoadto = new DAOaDTO();
-	
-		//Buscamos el alumno por su id y lo guardamos en el modelo
-		//Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById(dtoUtil.getIdSeleccionado());
-		Optional<Alumnos> alumnoSeleccionado = consultas.buscaAlumno(dtoUtil.getIdSeleccionado());
-		miModelo.put("alumnoSeleccionado", daoadto.alumnoDAOaDTO(alumnoSeleccionado.get()));
-	
-		//Aqui guardamos el potatil que tenga asignado.
-		PortatilesDTO portatilAsignado = new PortatilesDTO();
-	
-	
-		for (Portatil portatil : consultas.listarTodosPortatiles()) {
+		try {
+			
+			DAOaDTO daoadto = new DAOaDTO();
+			
+			//Buscamos el alumno por su id y lo guardamos en el modelo
+			//Optional<Alumnos> alumnoSeleccionado = alumnoRepositorio.findById(dtoUtil.getIdSeleccionado());
+			Optional<Alumnos> alumnoSeleccionado = consultas.buscaAlumno(dtoUtil.getIdSeleccionado());
+			miModelo.put("alumnoSeleccionado", daoadto.alumnoDAOaDTO(alumnoSeleccionado.get()));
 		
-			//Buscamos el portatil cuya referencia sea correspondiente a la del portatil asignado al alumno
-			if(portatil.getNumero_identificador().equals(alumnoSeleccionado.get().getPortatil_asignado().getNumero_identificador())) {
-				portatilAsignado = daoadto.portatiDAOaDTO(portatil);
+			//Aqui guardamos el potatil que tenga asignado.
+			PortatilesDTO portatilAsignado = new PortatilesDTO();
+		
+		
+			for (Portatil portatil : consultas.listarTodosPortatiles()) {
+			
+				//Buscamos el portatil cuya referencia sea correspondiente a la del portatil asignado al alumno
+				if(portatil.getNumero_identificador().equals(alumnoSeleccionado.get().getPortatil_asignado().getNumero_identificador())) {
+					portatilAsignado = daoadto.portatiDAOaDTO(portatil);
+				}
+				else {
+					mensaje = "El alumno no tiene un portatil asignado";
+					miModelo.put("mensaje", mensaje);
+				}
 			}
-			else {
-				mensaje = "El alumno no tiene un portatil asignado";
-				miModelo.put("mensaje", mensaje);
-			}
+		
+			miModelo.put("portatilAsignado", portatilAsignado);
+			
+			return new ModelAndView("Resultados", "miModelo", miModelo);
+			
+		
+		} catch (Exception e) {
+			
+			mensaje = "¡ERROR! El valor introducido no es valido o el alumno no tiene portatil asignado. Vuelva al Inicio.";
+			
+			miModelo.put("mensaje", mensaje);
+			
+			return new ModelAndView("Confirmacion", "miModelo", miModelo);
+
 		}
-	
-		miModelo.put("portatilAsignado", portatilAsignado);
 		
-		return new ModelAndView("Resultados", "miModelo", miModelo);
 	}	
 }

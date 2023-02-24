@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.DTOaDAO;
 import edu.prestamosVista.aplicacion.dto.PortatilesDTO;
 import edu.prestamosVista.web.servicios.Consultas;
@@ -49,16 +48,29 @@ public class ControladorAltasPortatil {
 	//Metodo post para añadir un nuevo portatil a la BBDD. 
 	@RequestMapping(value="/altaPortatil", method = RequestMethod.POST)
 	public ModelAndView altaPortatil(@ModelAttribute("nuevoPortatil") PortatilesDTO nuevoPortatilDTO) {	
-				
-		DTOaDAO dtoadao = new DTOaDAO();
+		
+		try {
+			
+			DTOaDAO dtoadao = new DTOaDAO();
+			
+			//Guardamos el portatil
+			consultas.guardaPortatil(dtoadao.portatiDTOaDAO(nuevoPortatilDTO));
 						
-		consultas.guardaPortatil(dtoadao.portatiDTOaDAO(nuevoPortatilDTO));
-					
-		mensaje = "Portatil Guardado";
+			mensaje = "Portatil Guardado";
 
-		System.out.println("Portatil Guardado.");
-		miModelo.put("mensaje", mensaje);
-		return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			System.out.println("Portatil Guardado.");
+			miModelo.put("mensaje", mensaje);
+			return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			
+			
+		} catch (Exception e) {
+
+			mensaje = "¡ERROR! Se ha producido un error. Acción NO realizada. Vuelva al Inicio.";
+			
+			miModelo.put("mensaje", mensaje);
+			
+			return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			
+		}
 	}
-
 }

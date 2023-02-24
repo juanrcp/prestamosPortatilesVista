@@ -13,7 +13,7 @@
 	<%@ include file="/vistas/menu.jsp"%>
 	<div class="container" style="background-color: lime; text-align: center; margin-top: 15%;">
 		<br>
-		<h1>BIENVENIDO A LA GESTION DE PORTATILES POR ALUMNOS</h1>
+		<h1>BIENVENIDO AL GESTOR DE PORTÁTILES PARA ALUMNOS</h1>
 	</div>
 </body>
 </html>
