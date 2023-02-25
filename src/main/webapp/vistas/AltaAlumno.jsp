@@ -45,11 +45,12 @@ form {
   				<br>
   				<li class="form-group">
     				<form:label path="telefono_alumno">TELEFONO:</form:label>
-    				<form:input type="number" class="form-control" path="telefono_alumno" placeholder="666951753" maxlength="9"/>
+    				<form:input type="number" class="form-control" path="telefono_alumno" placeholder="666951753" minlength="9" maxlength="9"/>
   				</li>
   				<br>
   				<li class="button">
   					<button class="btn btn-primary" type="Submit">GUARDAR</button>
+  					<button class="btn btn-primary" type="reset">LIMPIAR</button>
 				</li>
  			</ul>
 		</form:form>

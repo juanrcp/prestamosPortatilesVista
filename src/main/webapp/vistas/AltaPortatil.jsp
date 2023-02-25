@@ -55,6 +55,7 @@ form {
   				<br>
   				<li class="button">
   					<button class="btn btn-primary" type="Submit">GUARDAR</button>
+  					<button class="btn btn-primary" type="reset">LIMPIAR</button>
 				</li>
  			</ul>
 		</form:form>
