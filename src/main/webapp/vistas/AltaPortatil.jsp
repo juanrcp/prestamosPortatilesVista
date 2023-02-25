@@ -40,17 +40,17 @@ form {
  			<ul style="list-style:none">
   				<li class="form-group">
     				<form:label path="numero_identificador">NÚMERO IDENTIFICADOR:</form:label>
-    				<form:input type="text" class="form-control"  path="numero_identificador" placeholder="REFERENCIA-1"/>
+    				<form:input type="text" class="form-control"  path="numero_identificador" placeholder="REFERENCIA-1" required="numero_identificador"/>
   				</li>
   				<br>
   				<li class="form-group">
     				<form:label path="marca">MARCA:</form:label>
-    				<form:input type="text" class="form-control"  path="marca" placeholder="Introduzca MARCA"/>
+    				<form:input type="text" class="form-control"  path="marca" placeholder="Introduzca MARCA" required="marca"/>
   				</li>
   				<br>
   				<li class="form-group">
     				<form:label path="modelo">MODELO:</form:label>
-    				<form:input type="text" class="form-control" path="modelo" placeholder="Introduzca MODELO"/>
+    				<form:input type="text" class="form-control" path="modelo" placeholder="Introduzca MODELO" required="modelo"/>
   				</li>
   				<br>
   				<li class="button">

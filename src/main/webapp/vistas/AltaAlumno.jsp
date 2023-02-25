@@ -40,12 +40,12 @@ form {
  			<ul>
   				<li class="form-group">
     				<form:label path="nombre_alumno">NOMBRE COMPLETO:</form:label>
-    				<form:input type="text" class="form-control" path="nombre_alumno" placeholder="Nombre Apellidos"/>
+    				<form:input type="text" class="form-control" path="nombre_alumno" placeholder="Nombre Apellidos" required="nombre_alumno"/>
   				</li>
   				<br>
   				<li class="form-group">
     				<form:label path="telefono_alumno">TELEFONO:</form:label>
-    				<form:input type="number" class="form-control" path="telefono_alumno" placeholder="666951753" minlength="9" maxlength="9"/>
+    				<form:input type="tel" class="form-control" path="telefono_alumno" placeholder="666951753" required="telefono_alumno" maxlength="9"/>
   				</li>
   				<br>
   				<li class="button">
