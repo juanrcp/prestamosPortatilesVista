@@ -83,7 +83,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 			//Optional<Portatil> portatilSeleccionado = portatilRepositorio.findById(dtoUtil.getMensajeC());
 			Optional<Portatil> portatilSeleccionado = consultas.buscaPortatil(dtoUtil.getMensajeC());
 			
-			miModelo.put("alumnoSeleccionado", daoadto.portatiDAOaDTO(portatilSeleccionado.get()));
+			miModelo.put("portatilSeleccionado", daoadto.portatiDAOaDTO(portatilSeleccionado.get()));
 			
 			//Alumno poseedor del portatil
 			AlumnosDTO alumnoPoseedor = new AlumnosDTO();		
@@ -100,9 +100,17 @@ protected final Log logger = LogFactory.getLog(getClass());
 				}
 			}
 			
-			miModelo.put("alumnoPoseedor", alumnoPoseedor);
+			if(alumnoPoseedor.getPortatil_asignado() == null) {
+				
+				return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			}
+			else {
+				
+				miModelo.put("alumnoPoseedor", alumnoPoseedor);
 				
 				return new ModelAndView("Resultados", "miModelo", miModelo);
+			}
+			
 			
 		} catch (Exception e) {
 
