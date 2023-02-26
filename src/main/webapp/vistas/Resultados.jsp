@@ -25,7 +25,7 @@ ul {
 	<%@ include file="/vistas/menu.jsp"%>
 	<div class="container">
 		<br>
-		<h1>RELACION DE ASIGNACION</h1>
+		<h1>RELACIÓN DE ASIGNACIÓN</h1>
 		<br>
 		<c:if test="${miModelo.alumnoSeleccionado != null}">
 			<p>${miModelo.alumnoSeleccionado}</p>
@@ -35,7 +35,6 @@ ul {
 			<p>${miModelo.alumnoPoseedor}</p>
 			<p>${miModelo.portatilSeleccionado}</p>
 		</c:if>
-			
 		<br>
 		<a class="btn btn-primary" href="/prestamosVista/">VOLVER AL INICIO</a>
 	</div>

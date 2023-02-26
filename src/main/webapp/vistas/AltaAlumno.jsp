@@ -45,7 +45,7 @@ form {
   				<br>
   				<li class="form-group">
     				<form:label path="telefono_alumno">TELEFONO:</form:label>
-    				<form:input type="tel" class="form-control" path="telefono_alumno" placeholder="666951753" required="telefono_alumno" maxlength="9"/>
+    				<form:input type="tel" class="form-control" path="telefono_alumno" placeholder="666951753" required="telefono_alumno" pattern="[0-9]{9}" minlength="9" maxlength="9"/>
   				</li>
   				<br>
   				<li class="button">

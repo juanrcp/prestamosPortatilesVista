@@ -71,7 +71,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 	}
 	
 	
-	//Metodo para mostrar el alumno que tiene el portatil X segun su codeigo de registro.
+	//Metodo para mostrar el alumno que tiene el portatil X segun su codigo de registro.
 	@RequestMapping(value="/alumnodePortatil", method = RequestMethod.POST)
 	public ModelAndView portatilDeAlumno(@ModelAttribute ("dtoUtil") DTOUtiles dtoUtil) {
 		

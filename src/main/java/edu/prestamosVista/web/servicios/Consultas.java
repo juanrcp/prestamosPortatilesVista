@@ -17,7 +17,6 @@ import edu.prestamosVista.aplicacion.dal.Portatil;
 import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
-import edu.prestamosVista.aplicacion.dto.DTOaDAO;
 
 //Servicio donde realizaremos las consultas para las diferentes funciones. 
 @Service
