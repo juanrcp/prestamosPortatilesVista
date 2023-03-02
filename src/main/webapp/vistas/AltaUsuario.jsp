@@ -40,7 +40,7 @@ form {
  			<ul>
   				<li class="form-group">
     				<form:label path="nombre_Usuario">NOMBRE USUARIO:</form:label>
-    				<form:input type="text" class="form-control" path="nombre_Usuario" placeholder="Usuario" required="nombre_Usuario" minlength="5" maxlength="10"/>
+    				<form:input type="text" class="form-control" path="nombre_Usuario" placeholder="Usuario" required="nombre_Usuario" minlength="5" maxlength="10" pattern="[a-zA-Z]+"/>
   				</li>
   				<br>
   				<li class="form-group">

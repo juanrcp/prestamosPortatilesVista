@@ -34,6 +34,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 	//Mensajes de confirmación
 	String mensaje = null;
 	
+	//Inyeccion de consultas
 	@Autowired
 	Consultas consulta;
 	
