@@ -43,6 +43,12 @@ body{
       			<li class="nav-item">
         			<a class="nav-link" href="/prestamosVista/mostrarTodo">RELACIÓN ALUMNOS Y PORTÁTILES ASIGNADOS</a>
       			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="/prestamosVista/navegacionRegistroUsuario">LOGIN</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="/prestamosVista/navegacionRegistroUsuario">REGISTRAR</a>
+      			</li>
     		</ul>
  	 	</div>
 	</nav>

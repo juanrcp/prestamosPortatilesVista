@@ -15,12 +15,14 @@ import edu.prestamosVista.aplicacion.dal.AlumnoRepositorio;
 import edu.prestamosVista.aplicacion.dal.Alumnos;
 import edu.prestamosVista.aplicacion.dal.Portatil;
 import edu.prestamosVista.aplicacion.dal.PortatilRepositorio;
+import edu.prestamosVista.aplicacion.dal.Usuarios;
+import edu.prestamosVista.aplicacion.dal.UsuariosRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
 
 //Servicio donde realizaremos las consultas para las diferentes funciones. 
 @Service
-public class Consultas {
+public class Consultas implements ConsultasInterfaz{
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	
@@ -46,6 +48,9 @@ public class Consultas {
 	
 	@Autowired
 	PortatilRepositorio portatilRepositorio;
+	
+	@Autowired
+	UsuariosRepositorio usuarioRepositorio;
 	
 	
 	//Metodo para hacer un listado de todos los alumnos
@@ -159,6 +164,14 @@ public class Consultas {
 			mensaje = "NO SE HA REALIZADO EL BORRADO. Se ha producido un error, intentelo de nuevo.";
 		}
 		
+	}
+	
+	/**
+	 * Metodo para guardar registrar nuevos Usuarios.
+	 * @param usuario --> Usuario que se va a guardar en la BD
+	 */
+	public void registraUsuario(Usuarios usuario) {
+		usuarioRepositorio.save(usuario);
 	}
 
 }

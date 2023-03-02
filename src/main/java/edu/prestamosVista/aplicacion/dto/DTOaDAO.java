@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.prestamosVista.aplicacion.dal.Alumnos;
 import edu.prestamosVista.aplicacion.dal.Portatil;
+import edu.prestamosVista.aplicacion.dal.Usuarios;
 
 
 //Servicio con la clase para convertir los DTO a DAO
@@ -34,5 +35,18 @@ public class DTOaDAO {
 		
 		return new Portatil(port.getNumero_identificador(), port.getMarca(), port.getModelo(), ("Portatil-" + fecha));
 		
+	}
+	
+	
+	//Metodo para convertir a los portatilesDTO a DAO
+	public Usuarios usuarioDTOaDAO(UsuariosDTO usuarioDTO) {
+			
+		//Obtenemos fecha para actualizar el metadato
+		Date fecha = new Date();
+					 
+		System.out.println(fecha);
+			
+		return new Usuarios(usuarioDTO.getId_Usuario(), usuarioDTO.getNombre_Usuario(), usuarioDTO.getClave_Usuario(), usuarioDTO.getRol_usuario(), ("Usuario-" + fecha));
+			
 	}
 }
