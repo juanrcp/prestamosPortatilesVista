@@ -25,8 +25,7 @@ import edu.prestamosVista.web.servicios.Consultas;
 @Controller
 public class ControladorAltaUsuario {
 	
-	
-protected final Log logger = LogFactory.getLog(getClass());
+	protected final Log logger = LogFactory.getLog(getClass());
 	
 	//Creacion de modelo
 	Map<String, Object> miModelo = new HashMap<String, Object>();
@@ -57,7 +56,7 @@ protected final Log logger = LogFactory.getLog(getClass());
 	/**
 	 * Metodo post para añadir un nuevo usuario a la BBDD. 
 	 * @param nuevoUsuarioDTO
-	 * @return
+	 * @return Devulve la vista deseada junto con el modelo
 	 */
 	@RequestMapping(value="/altaUsuario", method = RequestMethod.POST)
 	public ModelAndView altaUsuario(@ModelAttribute("nuevoUsuario") UsuariosDTO nuevoUsuarioDTO) {	
