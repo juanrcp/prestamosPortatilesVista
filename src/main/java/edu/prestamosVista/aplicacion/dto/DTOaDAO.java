@@ -46,7 +46,7 @@ public class DTOaDAO {
 					 
 		System.out.println(fecha);
 			
-		return new Usuarios(usuarioDTO.getId_Usuario(), usuarioDTO.getNombre_Usuario(), usuarioDTO.getClave_Usuario(), usuarioDTO.getRol_usuario(), ("Usuario-" + fecha));
+		return new Usuarios(usuarioDTO.getNombre_Usuario(), usuarioDTO.getClave_Usuario(), usuarioDTO.getRol_usuario(), ("Usuario-" + fecha));
 			
 	}
 }

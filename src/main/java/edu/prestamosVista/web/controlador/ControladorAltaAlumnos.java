@@ -38,16 +38,37 @@ public class ControladorAltaAlumnos {
 	@Autowired
 	Consultas consultas;
 	
+	//Inyeccion del Controlador del login para controlar accesos y sesion
+	@Autowired
+	ControladorLogin sesion;
+	
 	
 	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo alumno vacio
 	@RequestMapping(value="/navegacionFormularioAltaAlumno")
-	public String navegacionFormularioAltaAlumno(Model modelo) {
+	public ModelAndView navegacionFormularioAltaAlumno(Model modelo) {
 		
-		logger.info("Navegamos al formulario de Alta");
-		AlumnosDTO nuevoAlumnoDTO = new AlumnosDTO();		
+		try {
+			
+			//Controlamos sesion inyectandole el modelo con el rol
+			if(sesion.miModelo.get("rol").equals("GESTOR")) {
+			
+				logger.info("Navegamos al formulario de Alta");
+				AlumnosDTO nuevoAlumnoDTO = new AlumnosDTO();	
+							
+				modelo.addAttribute("nuevoAlumno", nuevoAlumnoDTO);
+				return new ModelAndView("AltaAlumno", "miModelo", modelo);
+			}
+			else {
+				mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+				sesion.miModelo.put("mensaje", mensaje);
+				return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+			}
 		
-	 	modelo.addAttribute("nuevoAlumno", nuevoAlumnoDTO);
-		return "AltaAlumno";
+		} catch (Exception e) {
+			mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+			sesion.miModelo.put("mensaje", mensaje);
+			return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+		}
 	} 
 		
 	//Metodo post para añadir un nuevo alumno a la BBDD. 

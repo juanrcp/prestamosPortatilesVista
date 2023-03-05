@@ -46,28 +46,53 @@ protected final Log logger = LogFactory.getLog(getClass());
 	@Autowired
 	Consultas consultas;
 	
+	//Inyeccion del Controlador del login para controlar accesos y sesion
+	@Autowired
+	ControladorLogin sesion;
+	
 
 	//Metodo que extrae a todos los portatiles y mostrarlos
 	@RequestMapping(value="/mostrarPortatiles")
 	public ModelAndView mostrarPortatiles(Model model) {
 		
-		//Lista de alumnos AUX la cual reiniciaremos cada vez que ejecutamos el metodo. 
-		List<PortatilesDTO> listaPortatilesDTOaux = new ArrayList<PortatilesDTO>();
-		DAOaDTO daoadto = new DAOaDTO();
-	
-		for (Portatil portatil : consultas.listarTodosPortatiles()) {
-		
-			listaPortatilesDTOaux.add(daoadto.portatiDAOaDTO(portatil));		
-		}
-		
-		//Guardamos la lista dentro de la lista final.
-		listaPortatilesDTO = listaPortatilesDTOaux;
-	
-		model.addAttribute("dtoUtil", dtoUtil);
-	
-		miModelo.put("listaPortatilesDTO", listaPortatilesDTO);
-		
-		return new ModelAndView("ListaPortatiles", "miModelo", miModelo);
+		try {
+			
+			//Controlamos sesion inyectandole el modelo con el rol
+			if(sesion.miModelo.get("rol").equals("GESTOR")) {
+				
+				//Lista de alumnos AUX la cual reiniciaremos cada vez que ejecutamos el metodo. 
+				List<PortatilesDTO> listaPortatilesDTOaux = new ArrayList<PortatilesDTO>();
+				DAOaDTO daoadto = new DAOaDTO();
+			
+				for (Portatil portatil : consultas.listarTodosPortatiles()) {
+				
+					listaPortatilesDTOaux.add(daoadto.portatiDAOaDTO(portatil));		
+				}
+				
+				//Guardamos la lista dentro de la lista final.
+				listaPortatilesDTO = listaPortatilesDTOaux;
+			
+				model.addAttribute("dtoUtil", dtoUtil);
+			
+				miModelo.put("listaPortatilesDTO", listaPortatilesDTO);
+				
+				return new ModelAndView("ListaPortatiles", "miModelo", miModelo);
+						
+			}
+			else {
+				
+				mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+				sesion.miModelo.put("mensaje", mensaje);
+				return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+				
+			}
+			
+		} catch (Exception e) {
+
+			mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+			sesion.miModelo.put("mensaje", mensaje);
+			return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+		}	
 	}
 	
 	

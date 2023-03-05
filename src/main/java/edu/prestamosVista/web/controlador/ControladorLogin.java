@@ -3,6 +3,11 @@ package edu.prestamosVista.web.controlador;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +28,32 @@ import edu.prestamosVista.web.servicios.Consultas;
  *
  */
 @Controller
-public class ControladorLogin {
+public class ControladorLogin extends HttpServlet{
 
 	protected final Log logger = LogFactory.getLog(getClass());
 	
-	//Creacion de modelo
+	//Creacion de modelo que usaremos entre otras cosas para controlar la sesion y gestionar el rol
 	Map<String, Object> miModelo = new HashMap<String, Object>();
 			
 	//Mensajes de confirmación
 	String mensaje = null;
-	
+
 	//Inyeccion de consultas
 	@Autowired
 	Consultas consulta;
 	
+	//PROPIEDADES
+	public Map<String, Object> getMiModelo() {
+		return miModelo;
+	}
+
+
+	public void setMiModelo(Map<String, Object> miModelo) {
+		this.miModelo = miModelo;
+	}
+
+	
+	//METODOS
 	/**
 	 * Controlador de navegacion al login en el que introducimos un modelo para que el usuario pueda acceder. 
 	 * @param modelo 
@@ -66,12 +83,27 @@ public class ControladorLogin {
 			DTOaDAO dtoadao = new DTOaDAO();
 				
 			//Guardamos al usuario.
-			//consulta.registraUsuario(dtoadao.usuarioDTOaDAO(usuarioDTO));
+			if(consulta.buscaUsuario(usuarioDTO) != null) {
+				
+				//Buscamos el usuario y guardamos su rol en el modelo
+				miModelo.put("rol", consulta.buscaUsuario(usuarioDTO).getRol_Usuario());
+				
+				System.out.println("Usuario Correcto.");
+				
+				mensaje = "Usuario Correcto.";
+				
+				miModelo.put("mensaje", mensaje);
+				
+		
+				return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			}
+			else {
 			
+				String denegado = "Usuario Incorrecto.";
+				miModelo.put("denegado", denegado);
+				return new ModelAndView("Login", "miModelo", miModelo);
+			}
 
-			System.out.println("Usuario Registrado.");
-			//miModelo.put("mensaje", mensaje);
-			return new ModelAndView("Confirmacion", "miModelo", miModelo);
 				
 		} catch (Exception e) {
 
@@ -79,11 +111,22 @@ public class ControladorLogin {
 				
 			miModelo.put("mensaje", mensaje);
 				
-			return new ModelAndView("Confirmacion", "miModelo", miModelo);
+			return new ModelAndView("Login", "miModelo", miModelo);
 				
 		}	
 	}
-	//hay que terminar el login por aqui 
-	//https://somospnt.com/blog/162-maneja-tus-usuarios-y-sus-roles-con-spring-security
-	//https://codigosdeprogramacion.com/cursos/?lesson=21-privilegios-y-roles-de-usuarios
+	
+	
+	@RequestMapping(value="/Logout")
+	public ModelAndView cerrarSesion() {	
+		
+		miModelo.clear();
+		
+		mensaje = "Sesion Cerrada.";
+		
+		miModelo.put("mensaje", mensaje);
+		
+		return new ModelAndView("Confirmacion", "miModelo", miModelo);
+		
+	}
 }

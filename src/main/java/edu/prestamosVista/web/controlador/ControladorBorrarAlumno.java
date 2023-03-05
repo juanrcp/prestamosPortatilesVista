@@ -41,6 +41,10 @@ public class ControladorBorrarAlumno {
 	@Autowired
 	Consultas consultas;
 	
+	//Inyeccion del Controlador del login para controlar accesos y sesion
+	@Autowired
+	ControladorLogin sesion;
+	
 	
 	//Ir a confirmar borrado en BorrarAlumno. Con la etiqueta PathVariable podemos obtener la id que le pasamos por URL
 	@RequestMapping(value="/confirmarBorradoAlumnos/{id_alumno}")
@@ -48,15 +52,25 @@ public class ControladorBorrarAlumno {
 		
 		try {
 			
-			logger.info("Navegamos a la confirmación del borrado.");		
-			
-			idSeleccionada = id_alumno;			
-			miModelo.put("idSeleccionada", idSeleccionada);
-			
-			model.addAttribute("dtoUtil", dtoUtil);
+			//Controlamos sesion inyectandole el modelo con el rol
+			if(sesion.miModelo.get("rol").equals("GESTOR")) {
+				
+				logger.info("Navegamos a la confirmación del borrado.");		
+				
+				idSeleccionada = id_alumno;			
+				miModelo.put("idSeleccionada", idSeleccionada);
+				
+				model.addAttribute("dtoUtil", dtoUtil);
 
-			return "BorrarAlumno";
-			
+				return "BorrarAlumno";
+				
+			}
+			else {
+				
+				logger.info("ACCESO DENEGADO: No tienes permiso para entrar en este apartado");
+				return "index";
+				
+			}
 			
 		} catch (Exception e) {
 

@@ -19,6 +19,7 @@ import edu.prestamosVista.aplicacion.dal.Usuarios;
 import edu.prestamosVista.aplicacion.dal.UsuariosRepositorio;
 import edu.prestamosVista.aplicacion.dto.AlumnosDTO;
 import edu.prestamosVista.aplicacion.dto.DTOUtiles;
+import edu.prestamosVista.aplicacion.dto.UsuariosDTO;
 
 //Servicio donde realizaremos las consultas para las diferentes funciones. 
 @Service
@@ -171,7 +172,31 @@ public class Consultas implements ConsultasInterfaz{
 	 * @param usuario --> Usuario que se va a guardar en la BD
 	 */
 	public void registraUsuario(Usuarios usuario) {
+		
 		usuarioRepositorio.save(usuario);
 	}
 
+	/**
+	 * Metodo para buscar un usuario para el login al que le introducimos un usuario
+	 * @param usuario --> Usuario que se va a loguear
+	 */
+	@Override
+	public Usuarios buscaUsuario(UsuariosDTO usuario) {
+		
+		List<Usuarios> listaUsuarios = (List<Usuarios>) usuarioRepositorio.findAll();
+		Usuarios usuarioEncontrado = null;
+		
+		for (Usuarios usu : listaUsuarios) {
+			if(usuario.getNombre_Usuario().equals(usu.getNombre_Usuario()) && usuario.getClave_Usuario().equals(usu.getClave_Usuario())) {
+				usuarioEncontrado = usu;
+				break;
+			
+			}
+			else {
+				usuarioEncontrado = null;
+			}
+		}
+		
+		return usuarioEncontrado;
+	}
 }

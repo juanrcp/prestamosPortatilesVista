@@ -42,30 +42,55 @@ public class ControladorListaAlumnos {
 	@Autowired
 	Consultas consultas;
 	
+	//Inyeccion del Controlador del login para controlar accesos y sesion
+	@Autowired
+	ControladorLogin sesion;
+	
 
 	//Metodo que extrae a todos los alumnos y los muestra
 	@RequestMapping(value="/mostrarAlumnos")
 	public ModelAndView mostrarAlumnos(Model model) {
 		
-		//Lista de alumnos AUX la cual reiniciaremos cada vez que ejecutamos el metodo. 
-		List<AlumnosDTO> listaAlumnosDTOaux = new ArrayList<>();
-		DAOaDTO daoadto = new DAOaDTO();
-	
-		for (Alumnos alumnos : consultas.listarTodosAlumnos()) {
-		
-			listaAlumnosDTOaux.add(daoadto.alumnoDAOaDTO(alumnos));		
+		try {
+			
+			//Controlamos sesion inyectandole el modelo con el rol
+			if(sesion.miModelo.get("rol").equals("GESTOR")) {
+				
+				//Lista de alumnos AUX la cual reiniciaremos cada vez que ejecutamos el metodo. 
+				List<AlumnosDTO> listaAlumnosDTOaux = new ArrayList<>();
+				DAOaDTO daoadto = new DAOaDTO();
+			
+				for (Alumnos alumnos : consultas.listarTodosAlumnos()) {
+				
+					listaAlumnosDTOaux.add(daoadto.alumnoDAOaDTO(alumnos));		
+				}
+				
+				//Guardamos la lista dentro de la lista final.
+				listaAlumnosDTO = listaAlumnosDTOaux;
+				
+				//listaAlumnosDTOaux.clear();
+			
+				model.addAttribute("dtoUtil", dtoUtil);
+			
+				miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
+				
+				return new ModelAndView("ListaAlumnos", "miModelo", miModelo);
+				
+			}
+			else {
+				
+				mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+				sesion.miModelo.put("mensaje", mensaje);
+				return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+				
+			}
+			
+		} catch (Exception e) {
+
+			mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+			sesion.miModelo.put("mensaje", mensaje);
+			return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
 		}
-		
-		//Guardamos la lista dentro de la lista final.
-		listaAlumnosDTO = listaAlumnosDTOaux;
-		
-		//listaAlumnosDTOaux.clear();
-	
-		model.addAttribute("dtoUtil", dtoUtil);
-	
-		miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
-		
-		return new ModelAndView("ListaAlumnos", "miModelo", miModelo);
 	}
 	
 	

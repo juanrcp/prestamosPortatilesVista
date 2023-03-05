@@ -7,7 +7,14 @@ import org.springframework.stereotype.Service;
 
 import edu.prestamosVista.aplicacion.dal.Alumnos;
 import edu.prestamosVista.aplicacion.dal.Portatil;
+import edu.prestamosVista.aplicacion.dal.Usuarios;
+import edu.prestamosVista.aplicacion.dto.UsuariosDTO;
 
+/**
+ * Servicio con la interfaz de las consultas
+ * @author Juan Ramón Canto Pachón
+ *
+ */
 @Service
 public interface ConsultasInterfaz {
 		
@@ -34,5 +41,8 @@ public interface ConsultasInterfaz {
 	
 	//Metodo para borrar portatiles
 	public void borraAlumnoporID(int idPortatil);
+	
+	//Metodo para buscar a un usuario para el login
+	public Usuarios buscaUsuario(UsuariosDTO usuario);
 
 }

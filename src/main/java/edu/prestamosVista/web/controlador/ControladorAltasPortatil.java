@@ -34,15 +34,42 @@ public class ControladorAltasPortatil {
 	@Autowired
 	Consultas consultas;
 	
+	//Inyeccion del Controlador del login para controlar accesos y sesion
+	@Autowired
+	ControladorLogin sesion;
+	
 	
 	//Controlador de navegacion al formulario en el que introducimos un modelo con un nuevo portatil vacio
 	@RequestMapping(value="/navegacionFormularioAltaPortatil")
-	public String navegacionFormularioAltaPortatil(Model modelo) {
-		logger.info("Navegamos al formulario de Alta");
-		PortatilesDTO nuevoPortatilDTO = new PortatilesDTO();		
+	public ModelAndView navegacionFormularioAltaPortatil(Model modelo) {
+		
+		try {
+			
+			//Controlamos sesion inyectandole el modelo con el rol
+			if(sesion.miModelo.get("rol").equals("GESTOR")) {
 				
-	 	modelo.addAttribute("nuevoPortatil", nuevoPortatilDTO);
-		return "AltaPortatil";
+				logger.info("Navegamos al formulario de Alta");
+				PortatilesDTO nuevoPortatilDTO = new PortatilesDTO();		
+						
+			 	modelo.addAttribute("nuevoPortatil", nuevoPortatilDTO);
+				return new ModelAndView("AltaPortatil", "miModelo", modelo);
+				
+			}
+			else {
+				
+				mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+				sesion.miModelo.put("mensaje", mensaje);
+				return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+				
+			}		
+			
+		} catch (Exception e) {
+
+			mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+			sesion.miModelo.put("mensaje", mensaje);
+			return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+		}
+		
 	} 
 				
 	//Metodo post para añadir un nuevo portatil a la BBDD. 

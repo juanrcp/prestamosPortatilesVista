@@ -47,6 +47,13 @@ form {
     				<form:label path="clave_Usuario">CONTRASEÑA:</form:label>
     				<form:input type="password" class="form-control" path="clave_Usuario" placeholder="Contraseña" required="clave_Usuario" minlength="9" maxlength="9"/>
   				</li>
+  				<!-- Mensaje error de registro -->
+				<c:if test="${miModelo.denegado != null}">
+					<br>
+					<li>
+						<h2><c:out value="${miModelo.denegado}"></c:out></h2>
+					</li>
+				</c:if>
   				<br>
   				<li class="button">
   					<button class="btn btn-primary" type="Submit">ACCEDER</button>
@@ -56,7 +63,7 @@ form {
 		</form:form>
   		<a type="button" class="btn btn-primary" href="/prestamosVista/navegacionRegistroUsuario">¿No eres usuario? Registrate</a>
 		</div>
-	</div>
-	
+		
+	</div>	
 </body>
 </html>

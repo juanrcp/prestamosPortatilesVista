@@ -29,32 +29,56 @@ public class ControladorListaTodo {
 
 		//Inyectamos consultas		
 		@Autowired
-		Consultas consulta;		
+		Consultas consulta;
+		
+		//Inyeccion del Controlador del login para controlar accesos y sesion
+		@Autowired
+		ControladorLogin sesion;
 		
 
 		//Metodo que extrae a todos los alumnos y los muestra
 		@RequestMapping(value="/mostrarTodo")
 		public ModelAndView mostrarAlumnos() {
 			
-			//Lista con los resultados
-			List<String> listaAsignaciones = new ArrayList<>();
-			
-			DAOaDTO daoadto = new DAOaDTO();
-		
-			for (Alumnos alumnos : consulta.listarTodosAlumnos()) {
-			
-				if(alumnos.getPortatil_asignado() != null) {
-					listaAsignaciones.add(daoadto.alumnoDAOaDTO(alumnos).toString() + " - PORTATIL ASIGNADO: " + daoadto.portatiDAOaDTO(alumnos.getPortatil_asignado()).toString());				
+			try {
+				
+				//Controlamos sesion inyectandole el modelo con el rol
+				if(sesion.miModelo.get("rol").equals("ADMINISTRADOR")) {
+					
+					//Lista con los resultados
+					List<String> listaAsignaciones = new ArrayList<>();
+					
+					DAOaDTO daoadto = new DAOaDTO();
+				
+					for (Alumnos alumnos : consulta.listarTodosAlumnos()) {
+					
+						if(alumnos.getPortatil_asignado() != null) {
+							listaAsignaciones.add(daoadto.alumnoDAOaDTO(alumnos).toString() + " - PORTATIL ASIGNADO: " + daoadto.portatiDAOaDTO(alumnos.getPortatil_asignado()).toString());				
+							
+						}
+						else {
+							listaAsignaciones.add(daoadto.alumnoDAOaDTO(alumnos).toString() + " - PORTATIL ASIGNADO: SIN PORTATIL ASIGNADO.");
+						}				
+					}
+				
+					miModelo.put("listaAsignaciones", listaAsignaciones);
+					
+					return new ModelAndView("ListaTodo", "miModelo", miModelo);
 					
 				}
 				else {
-					listaAsignaciones.add(daoadto.alumnoDAOaDTO(alumnos).toString() + " - PORTATIL ASIGNADO: SIN PORTATIL ASIGNADO.");
-				}				
-			}
-		
-			miModelo.put("listaAsignaciones", listaAsignaciones);
-			
-			return new ModelAndView("ListaTodo", "miModelo", miModelo);
-			
+					
+					String mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+					sesion.miModelo.put("mensaje", mensaje);
+					return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+					
+				}
+				
+			} catch (Exception e) {
+
+				String mensaje = "ACCESO DENEGADO: No tienes permiso para entrar en este apartado";
+				sesion.miModelo.put("mensaje", mensaje);
+				return new ModelAndView("Confirmacion", "miModelo", sesion.miModelo);
+			}	
 		}
 }

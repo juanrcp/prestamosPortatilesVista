@@ -46,6 +46,11 @@ body{
       			<li class="nav-item">
         			<a class="nav-link" href="/prestamosVista/login">LOGIN</a>
       			</li>
+      			<c:if test="${miModelo.rol != null}">
+      			<li class="nav-item">
+        			<a class="nav-link" href="/prestamosVista/Logout">CERRAR SESIÓN</a>
+      			</li>
+      			</c:if>
     		</ul>
  	 	</div>
 	</nav>

@@ -68,8 +68,9 @@ public class ControladorAltaUsuario {
 			//Guardamos al usuario.
 			consulta.registraUsuario(dtoadao.usuarioDTOaDAO(nuevoUsuarioDTO));
 			
-
 			System.out.println("Usuario Registrado.");
+			mensaje = "Usuario Registrado Correctamente.";
+			
 			miModelo.put("mensaje", mensaje);
 			return new ModelAndView("Confirmacion", "miModelo", miModelo);
 				

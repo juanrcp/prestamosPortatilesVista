@@ -2,6 +2,8 @@ package edu.prestamosVista.aplicacion.dal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,6 +20,8 @@ public class Usuarios {
 	 * ATRIBUTOS
 	 */
 	@Id
+	//ID autogenerado
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_Usuario")
 	long id_Usuario;
 	
