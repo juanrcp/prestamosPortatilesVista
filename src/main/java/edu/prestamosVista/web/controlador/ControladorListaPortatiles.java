@@ -76,6 +76,9 @@ protected final Log logger = LogFactory.getLog(getClass());
 			
 				miModelo.put("listaPortatilesDTO", listaPortatilesDTO);
 				
+				//Guardamos el rol para el contol del boton de cerrar sesion
+				miModelo.put("rol", sesion.miModelo.get("rol"));
+				
 				return new ModelAndView("ListaPortatiles", "miModelo", miModelo);
 						
 			}

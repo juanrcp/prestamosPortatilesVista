@@ -63,6 +63,9 @@ public class ControladorListaTodo {
 				
 					miModelo.put("listaAsignaciones", listaAsignaciones);
 					
+					//Guardamos el rol para el contol del boton de cerrar sesion
+					miModelo.put("rol", sesion.miModelo.get("rol"));
+					
 					return new ModelAndView("ListaTodo", "miModelo", miModelo);
 					
 				}

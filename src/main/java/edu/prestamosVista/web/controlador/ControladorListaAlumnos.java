@@ -74,6 +74,9 @@ public class ControladorListaAlumnos {
 			
 				miModelo.put("listaAlumnosDTO", listaAlumnosDTO);
 				
+				//Guardamos el rol para el contol del boton de cerrar sesion
+				miModelo.put("rol", sesion.miModelo.get("rol"));
+				
 				return new ModelAndView("ListaAlumnos", "miModelo", miModelo);
 				
 			}

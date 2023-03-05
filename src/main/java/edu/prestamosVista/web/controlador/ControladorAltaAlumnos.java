@@ -54,6 +54,9 @@ public class ControladorAltaAlumnos {
 			
 				logger.info("Navegamos al formulario de Alta");
 				AlumnosDTO nuevoAlumnoDTO = new AlumnosDTO();	
+				
+				//Guardamos el rol para el contol del boton de cerrar sesion
+				modelo.addAttribute("rol", sesion.miModelo.get("rol"));
 							
 				modelo.addAttribute("nuevoAlumno", nuevoAlumnoDTO);
 				return new ModelAndView("AltaAlumno", "miModelo", modelo);

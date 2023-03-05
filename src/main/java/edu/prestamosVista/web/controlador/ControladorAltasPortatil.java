@@ -49,7 +49,10 @@ public class ControladorAltasPortatil {
 			if(sesion.miModelo.get("rol").equals("GESTOR")) {
 				
 				logger.info("Navegamos al formulario de Alta");
-				PortatilesDTO nuevoPortatilDTO = new PortatilesDTO();		
+				PortatilesDTO nuevoPortatilDTO = new PortatilesDTO();	
+				
+				//Guardamos el rol para el contol del boton de cerrar sesion
+				modelo.addAttribute("rol", sesion.miModelo.get("rol"));
 						
 			 	modelo.addAttribute("nuevoPortatil", nuevoPortatilDTO);
 				return new ModelAndView("AltaPortatil", "miModelo", modelo);
